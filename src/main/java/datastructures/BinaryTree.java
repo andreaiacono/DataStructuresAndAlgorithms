@@ -27,10 +27,12 @@ public class BinaryTree {
                 return node;
             }
             else {
-                System.out.println("Goinf left");
-//                return getNode(node.getLeft(), key);
-                System.out.println("Goinf right");
-                return getNode(node.getRight(), key);
+                Node foundNode = getNode(node.getLeft(), key);
+                if (foundNode == null) {
+                    foundNode = getNode(node.getRight(), key);
+                }
+
+                return foundNode;
             }
         }
 

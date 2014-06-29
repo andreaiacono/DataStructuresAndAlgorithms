@@ -12,12 +12,6 @@ public class BinaryTreeTest {
     @Test
     public void testFindNode() throws Exception {
 
-        Integer a = new Integer(2347234);
-        Integer b = new Integer(2347234);
-        Assert.assertEquals(a, b);
-        Assert.assertEquals(true, a==b);
-
-
         BinaryTree tree = new BinaryTree();
 
         BinaryTree.Node root = tree.insert(10, "10", null);
