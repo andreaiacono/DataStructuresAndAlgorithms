@@ -20,19 +20,17 @@ public class BinaryTree {
     public Node getNode(Node node, Integer key) {
 
         if (node != null) {
-            System.out.println("getNode(" + node.getKey() + ")");
 
             if (node.getKey().equals(key)) {
-                System.out.println("Found");
                 return node;
             }
             else {
-                Node foundNode = getNode(node.getLeft(), key);
-                if (foundNode == null) {
-                    foundNode = getNode(node.getRight(), key);
+                Node childNode = getNode(node.getLeft(), key);
+                if (childNode == null) {
+                    childNode = getNode(node.getRight(), key);
                 }
 
-                return foundNode;
+                return childNode;
             }
         }
 
@@ -46,12 +44,12 @@ public class BinaryTree {
                 builder.append(browsingNode.toString());
             }
 
-            preOrderRecursiveTraversal(browsingNode.getLeft(), builder);
+            recursiveTraversal(type, browsingNode.getLeft(), builder);
             if (type == TraversalType.INORDER) {
-                builder.append(browsingNode.toString());
+                builder.append("\n").append(browsingNode.toString()).append(" - left: ").append(browsingNode.getLeft()!= null ? browsingNode.getLeft().getValue() : "null").append(" - right: ").append(browsingNode.getRight()!= null ? browsingNode.getRight().getValue() : null);
             }
 
-            preOrderRecursiveTraversal(browsingNode.getRight(), builder);
+            recursiveTraversal(type, browsingNode.getRight(), builder);
             if (type == TraversalType.POSTORDER) {
                 builder.append(browsingNode.toString());
             }
@@ -85,7 +83,6 @@ public class BinaryTree {
     }
 
 
-
     public void iterativeTraversal(TraversalType traversalType, StringBuilder builder) {
 
         Deque<Node> stack = new ArrayDeque<>();
@@ -114,39 +111,29 @@ public class BinaryTree {
     }
 
 
-
     public Node insert(Integer key, String value, Node parent) {
 
         Node node = new Node(key, value);
-
-        boolean insertOnLeft = Math.random() > 0.5;
 
         if (parent == null) {
             root = node;
         }
         else if (parent.getLeft() == null && parent.getRight() == null) {
-            if (insertOnLeft) {
-                parent.setLeft(node);
-            }
-            else {
-                parent.setRight(node);
-            }
-        }
-        else if (parent.getLeft() == null) {
+
+            // by default inserts a node on the left
             parent.setLeft(node);
-            return node;
         }
         else if (parent.getRight() == null) {
             parent.setRight(node);
             return node;
         }
-        else if (insertOnLeft) {
-            node.setLeft(parent.getLeft());
+        else if (parent.getLeft() == null) {
             parent.setLeft(node);
+            return node;
         }
         else {
-            node.setRight(parent.getRight());
-            parent.setRight(node);
+            node.setLeft(parent.getLeft());
+            parent.setLeft(node);
         }
 
         return node;
@@ -166,7 +153,7 @@ public class BinaryTree {
     public String toString() {
 
         StringBuilder builder = new StringBuilder();
-        int maxHeight = getHeigth();
+        int maxHeight = getHeight();
         int level = 0;
 
         BinaryTree.Node browsingNode = root;
@@ -189,10 +176,35 @@ public class BinaryTree {
 
     }
 
-    public int getHeigth() {
-        return -1;
+    public String printTree() {
+
+        System.out.println("Height: " + getHeight());
+
+        return printTree(root, new StringBuilder());
     }
 
+    private String printTree(Node node, StringBuilder builder) {
+
+        if (node != null) {
+            builder.append(node.toString() + "\n");
+            printTree(node.getLeft(), builder);
+            printTree(node.getRight(), builder);
+        }
+
+        return builder.toString();
+    }
+
+    public int getHeight() {
+        return getHeight(root);
+    }
+    private int getHeight(Node node) {
+
+        if (node == null) {
+            return 0;
+        }
+
+        return Math.max(getHeight(node.getLeft()), getHeight(node.getRight())) +1;
+    }
 
 
     public class Node {
