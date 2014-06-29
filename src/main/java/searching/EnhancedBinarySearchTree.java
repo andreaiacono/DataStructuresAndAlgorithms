@@ -14,6 +14,11 @@ public class EnhancedBinarySearchTree extends BinarySearchTree {
     private Node parent;
 
     @Override
+    public void insert(Integer key, String value) {
+        super.insert(key, value);
+    }
+
+    @Override
     public void inOrderTraversal(StringBuilder builder) {
 
         Node node = root;
