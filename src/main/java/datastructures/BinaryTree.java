@@ -2,6 +2,8 @@ package datastructures;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +14,7 @@ import java.util.Deque;
 public class BinaryTree {
 
     protected enum TraversalType {
-        INORDER, PREORDER, POSTORDER, LEVELORDER;
+        INORDER, PREORDER, POSTORDER;
     }
 
     protected Node root;
@@ -46,7 +48,7 @@ public class BinaryTree {
 
             recursiveTraversal(type, browsingNode.getLeft(), builder);
             if (type == TraversalType.INORDER) {
-                builder.append("\n").append(browsingNode.toString()).append(" - left: ").append(browsingNode.getLeft()!= null ? browsingNode.getLeft().getValue() : "null").append(" - right: ").append(browsingNode.getRight()!= null ? browsingNode.getRight().getValue() : null);
+                builder.append(browsingNode.toString());
             }
 
             recursiveTraversal(type, browsingNode.getRight(), builder);
@@ -110,6 +112,31 @@ public class BinaryTree {
         while (!stack.isEmpty() || browsingNode != null);
     }
 
+    public void levelOrderTraversal(StringBuilder builder) {
+
+        Queue<Node> queue = new ArrayBlockingQueue<>(100);
+        BinaryTree.Node node = getRoot();
+
+        while (node != null) {
+
+            builder.append(node);
+
+            if (node.getLeft() != null) {
+                queue.add(node.getLeft());
+            }
+            if (node.getRight() != null) {
+                queue.add(node.getRight());
+            }
+
+            if (!queue.isEmpty()) {
+                node = queue.remove();
+            }
+            else {
+                node = null;
+            }
+        }
+    }
+
 
     public Node insert(Integer key, String value, Node parent) {
 
@@ -151,6 +178,8 @@ public class BinaryTree {
 
     @Override
     public String toString() {
+
+        int width = (int) Math.pow(2, getHeight());
 
         StringBuilder builder = new StringBuilder();
         int maxHeight = getHeight();
@@ -197,13 +226,14 @@ public class BinaryTree {
     public int getHeight() {
         return getHeight(root);
     }
+
     private int getHeight(Node node) {
 
         if (node == null) {
             return 0;
         }
 
-        return Math.max(getHeight(node.getLeft()), getHeight(node.getRight())) +1;
+        return Math.max(getHeight(node.getLeft()), getHeight(node.getRight())) + 1;
     }
 
 
