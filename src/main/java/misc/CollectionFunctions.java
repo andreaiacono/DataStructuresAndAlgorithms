@@ -1,9 +1,6 @@
 package misc;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,5 +36,20 @@ public class CollectionFunctions {
 
             }
         }
+    }
+
+    public static <E> Set<E> insersection(Set<E> first, Set<E> second) {
+
+        Set<E> result = new HashSet<>();
+
+        Iterator<E> firstIterator = first.iterator();
+        while (firstIterator.hasNext()) {
+            E item = firstIterator.next();
+            if (second.contains(item)) {
+                result.add(item);
+            }
+        }
+
+        return result;
     }
 }
