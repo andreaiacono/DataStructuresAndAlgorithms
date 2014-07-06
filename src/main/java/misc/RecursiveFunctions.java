@@ -3,6 +3,7 @@ package misc;
 import java.util.Arrays;
 
 /**
+ * CodingBat recursion exercises
  * Created with IntelliJ IDEA.
  * User: andrea
  * Date: 04/07/14
@@ -16,40 +17,122 @@ public class RecursiveFunctions {
         System.out.println("Count7(7667127)=" + count7(7667127));
         System.out.println("PowerN(3,4)=" + powerN(3, 4));
         String val = "jgfjcxxxxxsfbjc";
-        System.out.println("CountX('"+ val + "')=" + countX(val));
+        System.out.println("CountX('" + val + "')=" + countX(val));
         val = "adfsdanhidfsdaghi";
-        System.out.println("CountHi('"+ val + "')=" + countHi(val));
+        System.out.println("CountHi('" + val + "')=" + countHi(val));
         val = "ahxsabfjabxzxqsgxxs";
-        System.out.println("changeXToY('"+ val + "')=" + changeXToY(val));
+        System.out.println("changeXToY('" + val + "')=" + changeXToY(val));
         val = "pip";
-        System.out.println("changePi('"+ val + "')=" + changePi(val));
+        System.out.println("changePi('" + val + "')=" + changePi(val));
         val = "xcxafcxafcaxxa";
-        System.out.println("removeX('"+ val + "')=" + removeX(val));
+        System.out.println("removeX('" + val + "')=" + removeX(val));
         int[] nums = {1, 6, 6, 4};
-        System.out.println("array6('"+ Arrays.toString(nums) + "')=" + array6(nums, 0));
+        System.out.println("array6('" + Arrays.toString(nums) + "')=" + array6(nums, 0));
 
-        nums = new int[] {11, 6, 11, 4, 11, 11};
-        System.out.println("array11('"+ Arrays.toString(nums) + "')=" + array11(nums, 0));
+        nums = new int[]{11, 6, 11, 4, 11, 11};
+        System.out.println("array11('" + Arrays.toString(nums) + "')=" + array11(nums, 0));
 
-        nums = new int[] {11, 6, 6, 4, 11, 110};
-        System.out.println("array220('"+ Arrays.toString(nums) + "')=" + array220(nums, 0));
+        nums = new int[]{11, 6, 6, 4, 11, 110};
+        System.out.println("array220('" + Arrays.toString(nums) + "')=" + array220(nums, 0));
 
         val = "1234567890";
-        System.out.println("allStar('"+ val + "')=" + allStar(val));
+        System.out.println("allStar('" + val + "')=" + allStar(val));
+        val = "abccdeffghh";
+        System.out.println("pairStart('" + val + "')=" + pairStar(val));
+        val = "hgfxaxcsfx";
+        System.out.println("endX('" + val + "')=" + endX(val));
+        val = "ihihhh";
+        System.out.println("countPairs('" + val + "')=" + countPairs(val));
+        val = "ababc";
+        System.out.println("countAbc('" + val + "')=" + countAbc(val));
+    }
 
+    public int strCount(String str, String sub) {
+        if (str.length() < sub.length()) return 0;
+
+        if (str.substring(0, sub.length()).equals(sub)) return 1 + strCount(str.substring(sub.length()), sub);
+        return strCount(str.substring(1), sub);
+    }
+
+    public static boolean nestParen(String str) {
+        if (str.length() == 0) return true;
+        if (str.length() == 1) return false;
+
+        if (str.charAt(0) == '(' && str.charAt(str.length() - 1) == ')')
+            return true && nestParen(str.substring(1, str.length() - 1));
+        return false;
+    }
+
+    public static String parenBit(String str) {
+        if (str.length() == 1) return str;
+        if (str.charAt(0) == '(') {
+            int pos = str.indexOf(")");
+            return "(" + str.substring(1, pos) + ")";
+        }
+        return parenBit(str.substring(1));
+    }
+
+    public static int countHi2(String str) {
+        if (str.length() < 2) return 0;
+        if (str.charAt(0) == 'h' && str.charAt(1) == 'i') return 1 + countHi2(str.substring(2));
+        if (str.charAt(0) != 'x' && str.charAt(1) == 'h' && str.charAt(2) == 'i') return 1 + countHi2(str.substring(3));
+        if (str.charAt(0) == 'x' && str.charAt(1) == 'h' && str.charAt(2) == 'i') return countHi2(str.substring(3));
+        return countHi2(str.substring(1));
+    }
+
+    public static String stringClean(String str) {
+        if (str.length() < 2) return str;
+        if (str.charAt(0) == str.charAt(1)) return stringClean(str.substring(1));
+        return str.charAt(0) + stringClean(str.substring(1));
+    }
+
+    public int count11(String str) {
+        if (str.length() < 2) return 0;
+        if (str.charAt(0) == '1' && str.charAt(1) == '1') return 1 + count11(str.substring(2));
+        return count11(str.substring(1));
+    }
+
+
+    public static int countAbc(String str) {
+        if (str.length() < 3) return 0;
+        if (str.substring(0, 3).equals("abc") || str.substring(0, 3).equals("aba"))
+            return 1 + countAbc(str.substring(1));
+        return countAbc(str.substring(1));
+    }
+
+
+    public static int countPairs(String str) {
+        if (str.length() < 3) return 0;
+        if (str.charAt(0) == str.charAt(2)) return 1 + countPairs(str.substring(1));
+        return countPairs(str.substring(1));
+    }
+
+    public static String endX(String str) {
+        int pos = str.indexOf("x");
+        if (pos == -1) return str;
+        if (pos == 0) return endX(str.substring(1)) + "x";
+        return str.substring(0, pos) + endX(str.substring(pos + 1)) + "x";
+
+    }
+
+    public static String pairStar(String str) {
+        if (str.length() <= 1) return str;
+        if (str.charAt(0) == str.charAt(1)) return str.charAt(0) + "*" + pairStar(str.substring(1));
+        return str.charAt(0) + pairStar(str.substring(1));
     }
 
     public static String allStar(String str) {
+        if (str.length() <= 1) return str;
         int pos = str.indexOf("*");
-        if (pos == 1) return "*" + str;
+        if (pos == 1) return str;
         if (pos == -1) pos = str.length();
-        return allStar(str.substring(0, pos-1) + "*" + str.substring(pos-1));
+        return allStar(str.substring(0, pos - 1) + "*" + str.substring(pos - 1));
+
     }
 
-
     public static boolean array220(int[] nums, int index) {
-        if (index == nums.length-1) return false;
-        return nums[index+1] == nums[index]*10 || array220(nums, index+1);
+        if (index == nums.length - 1) return false;
+        return nums[index + 1] == nums[index] * 10 || array220(nums, index + 1);
     }
 
     public static int array11(int[] nums, int index) {
@@ -60,7 +143,7 @@ public class RecursiveFunctions {
 
     public static boolean array6(int[] nums, int index) {
         if (index == nums.length) return false;
-        return nums[index] == 6 || array6(nums, index+1);
+        return nums[index] == 6 || array6(nums, index + 1);
     }
 
     public static String removeX(String val) {
@@ -78,25 +161,25 @@ public class RecursiveFunctions {
     public static String changeXToY(String val) {
         int pos = val.indexOf("x");
         if (val.length() == 0 || pos < 0) return val;
-        return changeXToY(val.substring(0, pos) + "y" + val.substring(pos+1));
+        return changeXToY(val.substring(0, pos) + "y" + val.substring(pos + 1));
     }
 
     public static int countHi(String val) {
         if (val.length() == 0) return 0;
-        int result = val.charAt(val.length()-1) == 'i' && val.charAt(val.length()-2) == 'h' ? 1 : 0;
+        int result = val.charAt(val.length() - 1) == 'i' && val.charAt(val.length() - 2) == 'h' ? 1 : 0;
         return result + countHi(val.substring(0, val.length() - 1));
     }
 
     public static int countX(String val) {
         if (val.length() == 0) return 0;
-        int result = val.charAt(val.length()-1) == 'x' ? 1 : 0;
-        return result + countX(val.substring(0, val.length()-1));
+        int result = val.charAt(val.length() - 1) == 'x' ? 1 : 0;
+        return result + countX(val.substring(0, val.length() - 1));
     }
 
     public static int powerN(int base, int n) {
 
         if (n == 0) return 1;
-        return base * (powerN(base, n-1));
+        return base * (powerN(base, n - 1));
     }
 
     public static int fibonacci(int n) {
