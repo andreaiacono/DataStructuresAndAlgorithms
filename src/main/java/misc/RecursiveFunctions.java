@@ -47,6 +47,107 @@ public class RecursiveFunctions {
         System.out.println("countAbc('" + val + "')=" + countAbc(val));
     }
 
+    public static boolean split53(int[] nums) {
+
+        return split53Helper(nums, 0, 0, 0);
+    }
+
+    public static boolean split53Helper(int[] nums, int n, int sum1, int sum2) {
+        if (n >= nums.length) return sum1 == sum2;
+
+        if (nums[n] % 5 == 0) {
+            return split53Helper(nums, n + 1, sum1 + nums[n], sum2);
+        }
+        else if (nums[n] % 3 == 0) {
+            return split53Helper(nums, n + 1, sum1, sum2 + nums[n]);
+        }
+        else return split53Helper(nums, n + 1, sum1 + nums[n], sum2)|| split53Helper(nums, n + 1, sum1, sum2 + nums[n]);
+    }
+
+    public static boolean splitOdd10(int[] nums) {
+        return splitOdd10Helper(nums, 0, 0, 0);
+    }
+
+    public static boolean splitOdd10Helper(int[] nums, int n, int sum1, int sum2) {
+        if (n >= nums.length) return sum1 %10 == 0 && sum2 % 2 == 1;
+        return splitOdd10Helper(nums, n + 1, sum1 + nums[n], sum2)|| splitOdd10Helper(nums, n + 1, sum1, sum2 + nums[n]);
+    }
+
+
+    public static boolean splitArray(int[] nums) {
+        return splitHelper(nums, 0, 0, 0);
+    }
+
+    public static boolean splitHelper(int[] nums, int n, int sum1, int sum2) {
+        if (n >= nums.length) return sum1 == sum2;
+        return splitHelper(nums, n + 1, sum1 + nums[n], sum2)|| splitHelper(nums, n + 1, sum1, sum2 + nums[n]);
+    }
+
+
+    public static boolean groupSumClump(int start, int[] nums, int target) {
+        if (start >= nums.length) return target == 0;
+
+        int counter = 1;
+        while(start+counter < nums.length && nums[start] == nums[start+counter]) {
+            counter ++;
+        }
+        if (counter>1) {
+            if (groupSumClump(start+counter, nums, target - (nums[start]*(counter)))) return true;
+            if (groupSumClump(start+counter, nums, target)) return true;
+        }
+        else {
+            if (groupSumClump(start+1, nums, target - nums[start])) return true;
+            if (groupSumClump(start+1, nums, target)) return true;
+        }
+        return false;
+    }
+
+    public static boolean groupSum5(int start, int[] nums, int target) {
+
+        if (start >= nums.length) return target == 0;
+
+        if (nums[start] % 5 != 0) {
+            if (groupSum5(start+1, nums, target)) return true;
+            if (groupSum5(start+1, nums, target-nums[start])) return true;
+        }
+        else {
+            if (start < nums.length-1 && nums[start+1] == 1) {
+                return groupSum5(start+2, nums, target-nums[start]);
+            }
+            return (groupSum5(start+1, nums, target-nums[start]));
+        }
+        return false;
+    }
+
+    public static boolean groupNoAdj(int start, int[] nums, int target) {
+
+        if (start >= nums.length) return target == 0;
+
+        if (groupNoAdj(start+2, nums, target-nums[start])) return true;
+        if (groupNoAdj(start+1, nums, target)) return true;
+
+        return false;
+    }
+
+
+    public static boolean groupSum6(int start, int[] nums, int target) {
+
+        if (start >= nums.length) return target == 0;
+
+        if (groupSum6(start+1, nums, target-nums[start])) return true;
+        if (nums[start] != 6 && groupSum6(start+1, nums, target)) return true;
+
+        return false;
+    }
+
+    public static boolean groupSum(int start, int[] nums, int target) {
+
+        if (start > nums.length-1) return (target == 0);
+        if (groupSum(start + 1, nums, target - nums[start])) return true;
+        if (groupSum(start + 1, nums, target)) return true;
+        return false;
+    }
+
     public int strDist(String str, String sub) {
         int subLen = sub.length();
         if (str.length() < subLen) return 0;
