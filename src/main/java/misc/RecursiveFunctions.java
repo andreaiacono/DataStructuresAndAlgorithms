@@ -47,7 +47,24 @@ public class RecursiveFunctions {
         System.out.println("countAbc('" + val + "')=" + countAbc(val));
     }
 
-    public int strCount(String str, String sub) {
+    public int strDist(String str, String sub) {
+        int subLen = sub.length();
+        if (str.length() < subLen) return 0;
+        if (str.startsWith(sub)) {
+            if (str.substring(str.length() - subLen).equals(sub)) return str.length();
+            else return strDist(str.substring(0, str.length()-1), sub);
+        }
+        else return strDist(str.substring(1), sub);
+    }
+
+    public static boolean strCopies(String str, String sub, int n) {
+        int subLen = sub.length();
+        if (str.length() < subLen) return n==0;
+        if (str.substring(0, subLen).equals(sub)) return strCopies(str.substring(1), sub, n -1);
+        return strCopies(str.substring(1), sub, n);
+    }
+
+    public static int strCount(String str, String sub) {
         if (str.length() < sub.length()) return 0;
 
         if (str.substring(0, sub.length()).equals(sub)) return 1 + strCount(str.substring(sub.length()), sub);
