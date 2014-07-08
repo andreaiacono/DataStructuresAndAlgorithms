@@ -1,4 +1,4 @@
-package misc;
+package recursion;
 
 import java.util.Arrays;
 
@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Date: 04/07/14
  * Time: 13.10
  */
-public class RecursiveFunctions {
+public class CodingBat {
 
     public static void main(String[] args) {
         System.out.println("Fibonacci(10)=" + fibonacci(10));
@@ -61,7 +61,8 @@ public class RecursiveFunctions {
         else if (nums[n] % 3 == 0) {
             return split53Helper(nums, n + 1, sum1, sum2 + nums[n]);
         }
-        else return split53Helper(nums, n + 1, sum1 + nums[n], sum2)|| split53Helper(nums, n + 1, sum1, sum2 + nums[n]);
+        else
+            return split53Helper(nums, n + 1, sum1 + nums[n], sum2) || split53Helper(nums, n + 1, sum1, sum2 + nums[n]);
     }
 
     public static boolean splitOdd10(int[] nums) {
@@ -69,8 +70,8 @@ public class RecursiveFunctions {
     }
 
     public static boolean splitOdd10Helper(int[] nums, int n, int sum1, int sum2) {
-        if (n >= nums.length) return sum1 %10 == 0 && sum2 % 2 == 1;
-        return splitOdd10Helper(nums, n + 1, sum1 + nums[n], sum2)|| splitOdd10Helper(nums, n + 1, sum1, sum2 + nums[n]);
+        if (n >= nums.length) return sum1 % 10 == 0 && sum2 % 2 == 1;
+        return splitOdd10Helper(nums, n + 1, sum1 + nums[n], sum2) || splitOdd10Helper(nums, n + 1, sum1, sum2 + nums[n]);
     }
 
 
@@ -80,7 +81,7 @@ public class RecursiveFunctions {
 
     public static boolean splitHelper(int[] nums, int n, int sum1, int sum2) {
         if (n >= nums.length) return sum1 == sum2;
-        return splitHelper(nums, n + 1, sum1 + nums[n], sum2)|| splitHelper(nums, n + 1, sum1, sum2 + nums[n]);
+        return splitHelper(nums, n + 1, sum1 + nums[n], sum2) || splitHelper(nums, n + 1, sum1, sum2 + nums[n]);
     }
 
 
@@ -88,16 +89,16 @@ public class RecursiveFunctions {
         if (start >= nums.length) return target == 0;
 
         int counter = 1;
-        while(start+counter < nums.length && nums[start] == nums[start+counter]) {
-            counter ++;
+        while (start + counter < nums.length && nums[start] == nums[start + counter]) {
+            counter++;
         }
-        if (counter>1) {
-            if (groupSumClump(start+counter, nums, target - (nums[start]*(counter)))) return true;
-            if (groupSumClump(start+counter, nums, target)) return true;
+        if (counter > 1) {
+            if (groupSumClump(start + counter, nums, target - (nums[start] * (counter)))) return true;
+            if (groupSumClump(start + counter, nums, target)) return true;
         }
         else {
-            if (groupSumClump(start+1, nums, target - nums[start])) return true;
-            if (groupSumClump(start+1, nums, target)) return true;
+            if (groupSumClump(start + 1, nums, target - nums[start])) return true;
+            if (groupSumClump(start + 1, nums, target)) return true;
         }
         return false;
     }
@@ -107,14 +108,14 @@ public class RecursiveFunctions {
         if (start >= nums.length) return target == 0;
 
         if (nums[start] % 5 != 0) {
-            if (groupSum5(start+1, nums, target)) return true;
-            if (groupSum5(start+1, nums, target-nums[start])) return true;
+            if (groupSum5(start + 1, nums, target)) return true;
+            if (groupSum5(start + 1, nums, target - nums[start])) return true;
         }
         else {
-            if (start < nums.length-1 && nums[start+1] == 1) {
-                return groupSum5(start+2, nums, target-nums[start]);
+            if (start < nums.length - 1 && nums[start + 1] == 1) {
+                return groupSum5(start + 2, nums, target - nums[start]);
             }
-            return (groupSum5(start+1, nums, target-nums[start]));
+            return (groupSum5(start + 1, nums, target - nums[start]));
         }
         return false;
     }
@@ -123,8 +124,8 @@ public class RecursiveFunctions {
 
         if (start >= nums.length) return target == 0;
 
-        if (groupNoAdj(start+2, nums, target-nums[start])) return true;
-        if (groupNoAdj(start+1, nums, target)) return true;
+        if (groupNoAdj(start + 2, nums, target - nums[start])) return true;
+        if (groupNoAdj(start + 1, nums, target)) return true;
 
         return false;
     }
@@ -134,15 +135,15 @@ public class RecursiveFunctions {
 
         if (start >= nums.length) return target == 0;
 
-        if (groupSum6(start+1, nums, target-nums[start])) return true;
-        if (nums[start] != 6 && groupSum6(start+1, nums, target)) return true;
+        if (groupSum6(start + 1, nums, target - nums[start])) return true;
+        if (nums[start] != 6 && groupSum6(start + 1, nums, target)) return true;
 
         return false;
     }
 
     public static boolean groupSum(int start, int[] nums, int target) {
 
-        if (start > nums.length-1) return (target == 0);
+        if (start > nums.length - 1) return (target == 0);
         if (groupSum(start + 1, nums, target - nums[start])) return true;
         if (groupSum(start + 1, nums, target)) return true;
         return false;
@@ -153,15 +154,15 @@ public class RecursiveFunctions {
         if (str.length() < subLen) return 0;
         if (str.startsWith(sub)) {
             if (str.substring(str.length() - subLen).equals(sub)) return str.length();
-            else return strDist(str.substring(0, str.length()-1), sub);
+            else return strDist(str.substring(0, str.length() - 1), sub);
         }
         else return strDist(str.substring(1), sub);
     }
 
     public static boolean strCopies(String str, String sub, int n) {
         int subLen = sub.length();
-        if (str.length() < subLen) return n==0;
-        if (str.substring(0, subLen).equals(sub)) return strCopies(str.substring(1), sub, n -1);
+        if (str.length() < subLen) return n == 0;
+        if (str.substring(0, subLen).equals(sub)) return strCopies(str.substring(1), sub, n - 1);
         return strCopies(str.substring(1), sub, n);
     }
 
