@@ -8,9 +8,9 @@ package datastructures;
  */
 public class MyArrayList<E> {
 
-    private Object[] data;
-    private int capacity;
-    private int pointer;
+    protected Object[] data;
+    protected int capacity;
+    protected int pointer;
 
     public MyArrayList() {
         this(1000);
@@ -36,6 +36,23 @@ public class MyArrayList<E> {
         }
         data[pointer] = item;
         pointer ++;
+    }
+
+    public E remove(E item) throws ArrayIndexOutOfBoundsException {
+
+        int index = 0;
+        for (int j=0; j<pointer-1; j++) {
+            if (((E) data[j]).equals(item)) {
+                index = j;
+                break;
+            }
+        }
+        for (int j=index; j<pointer-1; j++) {
+            data[j] = data[j+1];
+        }
+        pointer --;
+
+        return item;
     }
 
     public E remove(int index) throws ArrayIndexOutOfBoundsException {

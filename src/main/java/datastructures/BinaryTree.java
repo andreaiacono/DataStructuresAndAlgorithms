@@ -209,7 +209,6 @@ public class BinaryTree {
 
     public String printTree() {
 
-        System.out.println("Height: " + getHeight());
 
         return printTree(root, new StringBuilder());
     }

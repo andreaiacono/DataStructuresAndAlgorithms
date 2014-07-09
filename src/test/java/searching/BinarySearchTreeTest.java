@@ -61,23 +61,23 @@ public class BinarySearchTreeTest {
 
         StringBuilder builder = new StringBuilder();
         tree.preOrderRecursiveTraversal(tree.getRoot(), builder);
-        System.out.println("Tree rec preorder: " + builder.toString());
+//        System.out.println("Tree rec preorder: " + builder.toString());
 
         builder = new StringBuilder();
         tree.preOrderTraversal(builder);
-        System.out.println("Tree     preorder: " + builder.toString());
+//        System.out.println("Tree     preorder: " + builder.toString());
 
         builder = new StringBuilder();
         tree.inOrderRecursiveTraversal(tree.getRoot(), builder);
-        System.out.println("Tree rec inorder: " + builder.toString());
+//        System.out.println("Tree rec  inorder: " + builder.toString());
 
         builder = new StringBuilder();
         tree.inOrderTraversal(builder);
-        System.out.println("Tree     inorder: " + builder.toString());
+//        System.out.println("Tree      inorder: " + builder.toString());
 
         builder = new StringBuilder();
         tree.postOrderRecursiveTraversal(tree.getRoot(), builder);
-        System.out.println("Tree rec postord: " + builder.toString());
+//        System.out.println("Tree rec  postord: " + builder.toString());
 
 
     }
