@@ -1,6 +1,7 @@
 package searching;
 
 import datastructures.BinaryTree;
+import datastructures.node.BinaryTreeNode;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,9 +12,9 @@ import datastructures.BinaryTree;
 public class BinarySearchTree extends BinaryTree {
 
 
-    public Node getNode(Integer key) {
+    public BinaryTreeNode getNode(Integer key) {
 
-        Node browsingNode = root;
+        BinaryTreeNode browsingNode = root;
         while (browsingNode != null) {
 
             if (key.compareTo(browsingNode.getKey()) < 0) {
@@ -34,16 +35,16 @@ public class BinarySearchTree extends BinaryTree {
     public void insert(Integer key, String value) {
 
         if (root == null) {
-            root = new BinaryTree.Node(key, value);
+            root = new BinaryTreeNode(key, value);
         }
         else {
 
-            Node node = root;
+            BinaryTreeNode node = root;
             while (node != null) {
 
                 if (key < node.getKey()) {
                     if (node.getLeft() == null) {
-                        Node newNode = new Node(key, value);
+                        BinaryTreeNode newNode = new BinaryTreeNode(key, value);
                         node.setLeft(newNode);
                         return;
                     }
@@ -53,7 +54,7 @@ public class BinarySearchTree extends BinaryTree {
                 }
                 else if (key > node.getKey()) {
                     if (node.getRight() == null) {
-                        Node newNode = new Node(key, value);
+                        BinaryTreeNode newNode = new BinaryTreeNode(key, value);
                         node.setRight(newNode);
                         return;
                     }
@@ -72,5 +73,15 @@ public class BinarySearchTree extends BinaryTree {
 
     }
 
+
+
+    public static boolean validateTree(BinaryTreeNode node, int min, int max) {
+
+        if (node == null) {
+            return true;
+        }
+
+        return (node.getKey() > min && node.getKey() <= max && validateTree(node.getLeft(), min, node.getKey()) && validateTree(node.getRight(), node.getKey(), max));
+    }
 
 }

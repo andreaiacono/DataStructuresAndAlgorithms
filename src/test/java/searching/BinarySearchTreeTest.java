@@ -1,6 +1,8 @@
 package searching;
 
 
+import datastructures.node.BinaryTreeNode;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -83,8 +85,25 @@ public class BinarySearchTreeTest {
     @Test
     public void testInOrderTraversal() throws Exception {
 
+    }
 
+    @Test
+    public void testValidateTree() throws Exception {
+        BinaryTreeNode root = new BinaryTreeNode(10, "10");
+        root.setLeft(new BinaryTreeNode(5, "5"));
+        root.setRight(new BinaryTreeNode(15, "15"));
 
+        root.getLeft().setLeft(new BinaryTreeNode(2, "2"));
+        root.getLeft().setRight(new BinaryTreeNode(7, "7"));
 
+        root.getRight().setLeft(new BinaryTreeNode(12, "12"));
+        root.getRight().setRight(new BinaryTreeNode(17, "17"));
+
+        Assert.assertTrue(BinarySearchTree.validateTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
+
+        root.getRight().setLeft(new BinaryTreeNode(2, "2"));
+        root.getRight().setRight(new BinaryTreeNode(17, "17"));
+
+        Assert.assertFalse(BinarySearchTree.validateTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
     }
 }

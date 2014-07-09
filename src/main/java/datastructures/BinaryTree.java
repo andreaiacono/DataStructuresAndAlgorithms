@@ -1,5 +1,7 @@
 package datastructures;
 
+import datastructures.node.BinaryTreeNode;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Queue;
@@ -17,9 +19,9 @@ public class BinaryTree {
         INORDER, PREORDER, POSTORDER;
     }
 
-    protected Node root;
+    protected BinaryTreeNode root;
 
-    public Node getNode(Node node, Integer key) {
+    public BinaryTreeNode getNode(BinaryTreeNode node, Integer key) {
 
         if (node != null) {
 
@@ -27,7 +29,7 @@ public class BinaryTree {
                 return node;
             }
             else {
-                Node childNode = getNode(node.getLeft(), key);
+                BinaryTreeNode childNode = getNode(node.getLeft(), key);
                 if (childNode == null) {
                     childNode = getNode(node.getRight(), key);
                 }
@@ -39,7 +41,7 @@ public class BinaryTree {
         return null;
     }
 
-    public void recursiveTraversal(TraversalType type, Node browsingNode, StringBuilder builder) {
+    public void recursiveTraversal(TraversalType type, BinaryTreeNode browsingNode, StringBuilder builder) {
 
         if (browsingNode != null) {
             if (type == TraversalType.PREORDER) {
@@ -59,17 +61,17 @@ public class BinaryTree {
         }
     }
 
-    public void preOrderRecursiveTraversal(Node browsingNode, StringBuilder builder) {
+    public void preOrderRecursiveTraversal(BinaryTreeNode browsingNode, StringBuilder builder) {
 
         recursiveTraversal(TraversalType.PREORDER, browsingNode, builder);
     }
 
-    public void inOrderRecursiveTraversal(Node browsingNode, StringBuilder builder) {
+    public void inOrderRecursiveTraversal(BinaryTreeNode browsingNode, StringBuilder builder) {
 
         recursiveTraversal(TraversalType.INORDER, browsingNode, builder);
     }
 
-    public void postOrderRecursiveTraversal(Node browsingNode, StringBuilder builder) {
+    public void postOrderRecursiveTraversal(BinaryTreeNode browsingNode, StringBuilder builder) {
 
         recursiveTraversal(TraversalType.POSTORDER, browsingNode, builder);
     }
@@ -87,9 +89,9 @@ public class BinaryTree {
 
     public void iterativeTraversal(TraversalType traversalType, StringBuilder builder) {
 
-        Deque<Node> stack = new ArrayDeque<>();
+        Deque<BinaryTreeNode> stack = new ArrayDeque<>();
 
-        Node browsingNode = root;
+        BinaryTreeNode browsingNode = root;
 
         do {
 
@@ -114,8 +116,8 @@ public class BinaryTree {
 
     public void levelOrderTraversal(StringBuilder builder) {
 
-        Queue<Node> queue = new ArrayBlockingQueue<>(100);
-        BinaryTree.Node node = getRoot();
+        Queue<BinaryTreeNode> queue = new ArrayBlockingQueue<>(100);
+        BinaryTreeNode node = getRoot();
 
         while (node != null) {
 
@@ -138,9 +140,9 @@ public class BinaryTree {
     }
 
 
-    public Node insert(Integer key, String value, Node parent) {
+    public BinaryTreeNode insert(Integer key, String value, BinaryTreeNode parent) {
 
-        Node node = new Node(key, value);
+        BinaryTreeNode node = new BinaryTreeNode(key, value);
 
         if (parent == null) {
             root = node;
@@ -168,11 +170,11 @@ public class BinaryTree {
 
     public String getValue(Integer key) {
 
-        Node node = getNode(getRoot(), key);
+        BinaryTreeNode node = getNode(getRoot(), key);
         return node == null ? null : node.getValue();
     }
 
-    public Node getRoot() {
+    public BinaryTreeNode getRoot() {
         return root;
     }
 
@@ -185,7 +187,7 @@ public class BinaryTree {
         int maxHeight = getHeight();
         int level = 0;
 
-        BinaryTree.Node browsingNode = root;
+        BinaryTreeNode browsingNode = root;
         while (browsingNode != null) {
 
 //
@@ -212,7 +214,7 @@ public class BinaryTree {
         return printTree(root, new StringBuilder());
     }
 
-    private String printTree(Node node, StringBuilder builder) {
+    private String printTree(BinaryTreeNode node, StringBuilder builder) {
 
         if (node != null) {
             builder.append(node.toString() + "\n");
@@ -227,7 +229,7 @@ public class BinaryTree {
         return getHeight(root);
     }
 
-    private int getHeight(Node node) {
+    private int getHeight(BinaryTreeNode node) {
 
         if (node == null) {
             return 0;
@@ -237,49 +239,5 @@ public class BinaryTree {
     }
 
 
-    public class Node {
 
-        private Integer key;
-        private String value;
-        private Node left;
-        private Node right;
-
-        public Node(Integer key, String value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        public Node getLeft() {
-            return left;
-        }
-
-        public void setLeft(Node left) {
-            this.left = left;
-        }
-
-        public Node getRight() {
-            return right;
-        }
-
-        public void setRight(Node right) {
-            this.right = right;
-        }
-
-        public Integer getKey() {
-            return key;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return value + " ";
-        }
-    }
 }

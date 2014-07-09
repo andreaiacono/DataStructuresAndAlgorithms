@@ -1,5 +1,7 @@
 package searching;
 
+import datastructures.node.BinaryTreeNode;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -11,7 +13,7 @@ import java.util.Deque;
  */
 public class EnhancedBinarySearchTree extends BinarySearchTree {
 
-    private Node parent;
+    private BinaryTreeNode parent;
 
     @Override
     public void insert(Integer key, String value) {
@@ -21,8 +23,8 @@ public class EnhancedBinarySearchTree extends BinarySearchTree {
     @Override
     public void inOrderTraversal(StringBuilder builder) {
 
-        Node node = root;
-        Deque<Node> stack = new ArrayDeque<>();
+        BinaryTreeNode node = root;
+        Deque<BinaryTreeNode> stack = new ArrayDeque<>();
 
         do {
 
