@@ -21,6 +21,9 @@ public class RecursiveFunctions {
 
         System.out.println("Factorial Recursive: " + factorial(5) + "\n\n");
         System.out.println("Factorial Tail Recursive: " + factorialTail(5, 1) + "\n\n");
+
+        String val = "andreaiacono";
+        System.out.println("Reverse (" + val + "): " + reverse(val));
     }
 
     public static int factorial(int n) {
@@ -42,6 +45,13 @@ public class RecursiveFunctions {
         //if (n >= nums.length) return
 
 
+    }
+
+    public static String reverse(String val) {
+
+        if (val.length() < 2) return val;
+
+        return val.charAt(val.length()-1) + reverse(val.substring(1, val.length()-1)) + val.charAt(0);
     }
 
 }

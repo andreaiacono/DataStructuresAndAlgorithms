@@ -1,8 +1,8 @@
 package misc;
 
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,7 +19,47 @@ public class StringFunctions {
 
         String val = "andrea iacono";
         System.out.println("Reverse: " + Arrays.toString(reverse(val.toCharArray())));
+        System.out.println("isAnagram: " + isAnagram2("boston", "tnoobs"));
+        System.out.println("isAnagram: " + isAnagram2("boston", "tsoobs"));
 
+    }
+
+    public static boolean isAnagram2(String val1, String val2) {
+
+        if (val1.length() != val2.length()) return false;
+
+        Map<Character, Integer> val1Map = decomposeString(val1);
+        Map<Character, Integer> val2Map = decomposeString(val2);
+
+        return val1Map.equals(val2Map);
+    }
+
+    private static Map<Character, Integer> decomposeString(String val) {
+
+        Map<Character, Integer> map = new HashMap<>();
+        for (int j = 0; j < val.length(); j++) {
+
+            if (!map.containsKey(val.charAt(j))) {
+                map.put(val.charAt(j), 0);
+            }
+            map.put(val.charAt(j), map.get(val.charAt(j)) + 1);
+        }
+
+        return map;
+    }
+
+    public static boolean isAnagram(String val1, String val2) {
+
+        if (val1.length() != val2.length()) return false;
+
+        String copy = val2;
+        for (int j = 0; j < val1.length(); j++) {
+            int pos = copy.indexOf(val1.charAt(j));
+            if (pos < 0) return false;
+            copy = copy.substring(0, pos) + copy.substring(pos + 1);
+        }
+
+        return true;
     }
 
     public static char[] reverse(char[] value) {
