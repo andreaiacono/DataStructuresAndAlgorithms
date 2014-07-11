@@ -171,7 +171,7 @@ public class BinaryTree {
     public String getValue(Integer key) {
 
         BinaryTreeNode node = getNode(getRoot(), key);
-        return node == null ? null : node.getValue();
+        return node == null ? null : (String) node.getValue();
     }
 
     public BinaryTreeNode getRoot() {

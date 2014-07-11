@@ -6,12 +6,12 @@ package datastructures.node;
  * Date: 09/07/14
  * Time: 14.19
  */
-public class BasicNode {
+public class BasicNode<E> {
 
     protected Integer key;
-    protected String value;
+    protected E value;
 
-    public BasicNode(Integer key, String value) {
+    public BasicNode(Integer key, E value) {
         this.key = key;
         this.value = value;
     }
@@ -20,11 +20,11 @@ public class BasicNode {
         return key;
     }
 
-    public String getValue() {
+    public E getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(E value) {
         this.value = value;
     }
 
