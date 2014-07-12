@@ -8,16 +8,13 @@ package datastructures;
  */
 
 /**
- * an array backed queue
+ * a list backed queue
  */
 public class ListQueue<E> {
 
     private MyLinkedList<E> list;
 
     public ListQueue() {
-        this(100);
-    }
-    public ListQueue(int capacity) {
         list = new MyLinkedList();
     }
 

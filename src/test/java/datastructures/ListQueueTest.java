@@ -21,5 +21,13 @@ public class ListQueueTest {
         Assert.assertEquals("foo", queue.pop());
         Assert.assertEquals("bar", queue.pop());
         Assert.assertNull(queue.pop());
+
+        queue.push("foo");
+        queue.push("bar");
+        Assert.assertEquals("foo", queue.pop());
+        queue.push("test");
+        Assert.assertEquals("bar", queue.pop());
+        Assert.assertEquals("test", queue.pop());
+        Assert.assertNull(queue.pop());
     }
 }
