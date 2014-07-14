@@ -24,6 +24,9 @@ public class RecursiveFunctions {
 
         String val = "andreaiacono";
         System.out.println("Reverse (" + val + "): " + reverse(val));
+
+        System.out.println("Pow(3,4)=" + pow(3,4));
+        System.out.println("PowTail(3,4)=" + powTail(3,4,1));
     }
 
     public static int factorial(int n) {
@@ -39,6 +42,15 @@ public class RecursiveFunctions {
         return factorialTail(n - 1, n * accumulator);
     }
 
+    public static int pow(int base, int n) {
+        if (n == 1) return base;
+        return base * pow(base, n-1);
+    }
+
+    public static int powTail(int base, int n, int accumulator) {
+        if (n == 0) return accumulator;
+        return powTail(base, n-1, base*accumulator);
+    }
 
     public static void splitInTwo(int[] nums, int n, int[] set1, int[] set2, int min) {
 

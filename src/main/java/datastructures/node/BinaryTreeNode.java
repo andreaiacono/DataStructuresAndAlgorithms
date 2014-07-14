@@ -6,7 +6,7 @@ package datastructures.node;
  * Date: 09/07/14
  * Time: 14.20
  */
-public class BinaryTreeNode extends BasicNode {
+public class BinaryTreeNode<E> extends BasicNode {
 
     private BinaryTreeNode left;
     private BinaryTreeNode right;
