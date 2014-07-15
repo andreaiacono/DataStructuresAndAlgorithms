@@ -25,20 +25,19 @@ public class CurrencyDenominations {
         int[] values = new int[den.length];
         int amount = 212;
 
-        printAll(0, den, amount, values);
+        findMinCoinCombination(0, den, amount, values);
         System.out.println(Arrays.toString(minValues));
     }
 
-    public static void printAll(int index, int[] denominations, int amount, int[] vals) {
-
+    public static void findMinCoinCombination(int index, int[] denominations, int amount, int[] values) {
         if (amount == 0) {
             int sum =0;
-            for (int j=0; j<vals.length; j++) {
-                sum+=vals[j];
+            for (int j=0; j<values.length; j++) {
+                sum+=values[j];
             }
             if (sum < min) {
                 min = sum;
-                minValues = Arrays.copyOf(vals, vals.length);
+                minValues = Arrays.copyOf(values, values.length);
             }
             return;
         }
@@ -47,8 +46,8 @@ public class CurrencyDenominations {
 
         int currentDenomination = denominations[index];
         for (int i = 0; i <= (amount / currentDenomination); i++) {
-            vals[index] = i;
-            printAll(index + 1, denominations, amount - i * currentDenomination, vals);
+            values[index] = i;
+            findMinCoinCombination(index + 1, denominations, amount - i * currentDenomination, values);
         }
     }
 }
