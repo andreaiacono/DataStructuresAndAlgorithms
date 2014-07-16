@@ -21,6 +21,11 @@ public class BinaryTree {
 
     protected BinaryTreeNode root;
 
+    public BinaryTreeNode getNode(Integer key) {
+        return getNode(root, key);
+    }
+
+
     public BinaryTreeNode getNode(BinaryTreeNode node, Integer key) {
 
         if (node != null) {
@@ -139,6 +144,35 @@ public class BinaryTree {
         }
     }
 
+    public BinaryTreeNode findCommonAncestor(BinaryTreeNode root, BinaryTreeNode node1, BinaryTreeNode node2) {
+
+        BinaryTreeNode left = null;
+        BinaryTreeNode right = null;
+
+        if (root == null) {
+            return null;
+        }
+
+        if (node1 == root || node2 == root) {
+            return root;
+        }
+
+        left = findCommonAncestor(root.getLeft(), node1, node2);
+        right = findCommonAncestor(root.getRight(), node1, node2);
+
+        /**
+         * If Node a and Node b lie in the left, their Lowest Common Ancestor is in the left.
+         * If Node a and Node b lie in the right,their Lowest Common Ancestor is in the right.
+         *
+         * Otherwise, root is the Lowest common ancestor.
+         */
+        if (left != null && right != null) {
+            return root;
+        }
+
+        return (left != null) ? left : right;
+
+    }
 
     public BinaryTreeNode insert(Integer key, String value, BinaryTreeNode parent) {
 
@@ -236,7 +270,6 @@ public class BinaryTree {
 
         return Math.max(getHeight(node.getLeft()), getHeight(node.getRight())) + 1;
     }
-
 
 
 }

@@ -77,4 +77,12 @@ public class BinaryTreeTest {
         tree.levelOrderTraversal(builder);
         Assert.assertEquals("10 15 25 5 23 46 4 11 461 ", builder.toString());
     }
+
+    @Test
+    public void testLowestCommonAncestor() throws Exception {
+
+        BinaryTreeNode ancestor = tree.findCommonAncestor(tree.getRoot(), tree.getNode(11), tree.getNode(46));
+        Assert.assertEquals("25", ancestor.getValue());
+
+    }
 }
