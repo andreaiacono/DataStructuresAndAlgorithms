@@ -15,6 +15,11 @@ public class BinaryTreeNode<E> extends BasicNode {
         super(key, value);
     }
 
+    public BinaryTreeNode(Integer key) {
+        super(key, "" + key);
+    }
+
+
     public BinaryTreeNode getLeft() {
         return left;
     }

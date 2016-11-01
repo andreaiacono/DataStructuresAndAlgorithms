@@ -10,8 +10,8 @@ public class ArrayStackTest {
         ArrayStack<String> stack = new ArrayStack<>();
 
         Assert.assertNull(stack.pop());
-        stack.push("test");
-        Assert.assertEquals("test", stack.pop());
+        stack.push("contains");
+        Assert.assertEquals("contains", stack.pop());
         Assert.assertNull(stack.pop());
 
         stack.push("foo");
@@ -23,8 +23,8 @@ public class ArrayStackTest {
         stack.push("foo");
         stack.push("bar");
         Assert.assertEquals("bar", stack.pop());
-        stack.push("test");
-        Assert.assertEquals("test", stack.pop());
+        stack.push("contains");
+        Assert.assertEquals("contains", stack.pop());
         Assert.assertEquals("foo", stack.pop());
         Assert.assertNull(stack.pop());
     }

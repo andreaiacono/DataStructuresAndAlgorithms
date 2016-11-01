@@ -11,11 +11,11 @@ public class MyLinkedListTest {
         MyLinkedList<String> list = new MyLinkedList<>();
         Assert.assertTrue(list.size() == 0);
 
-        list.add("test");
+        list.add("contains");
         Assert.assertTrue(list.size() == 1);
 
         String test = list.get(0);
-        Assert.assertEquals("test", test);
+        Assert.assertEquals("contains", test);
     }
 
     @Test
@@ -35,9 +35,9 @@ public class MyLinkedListTest {
         Assert.assertEquals("bar", list.get(1));
         Assert.assertEquals("bar", list.get(12));
 
-        list.add("test", 1);
+        list.add("contains", 1);
         Assert.assertEquals("foo", list.get(0));
-        Assert.assertEquals("test", list.get(1));
+        Assert.assertEquals("contains", list.get(1));
         Assert.assertEquals("bar", list.get(2));
         Assert.assertTrue(list.size() == 3);
     }

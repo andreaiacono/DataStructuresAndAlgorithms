@@ -13,7 +13,7 @@ public class RecursiveFunctions {
 
     static int min = Integer.MAX_VALUE;
     //    static int[] nums = new int[]{23, 45, 12, 11};
-    static int[] nums = new int[]{23, 45, 12, 211, 9, 65, 81, 43, 9, 88};
+    static int[] nums = new int[]{23, 45, 12, 211, 9};
     static int[] set1 = new int[nums.length];
     static int[] set2 = new int[nums.length];
 
@@ -30,8 +30,34 @@ public class RecursiveFunctions {
         System.out.println("PowTail(3,4)=" + powTail(3, 4, 1) + "\n");
 
         splitInTwo(nums, nums.length - 1, new int[nums.length], new int[nums.length], 0, 0);
-        System.out.println("SplitInTwo" + Arrays.toString(nums) + " = " + Arrays.toString(set1) + " - " + Arrays.toString(set2) + " diff = "+ diff(set1, set2));
+        System.out.println("SplitInTwo" + Arrays.toString(nums) + " = " + Arrays.toString(set1) + " - " + Arrays.toString(set2) + " diff = " + diff(set1, set2));
+
+        System.out.println("Perumtations of " + Arrays.toString(nums) + " = " + Arrays.toString(permutations(nums)));
+
     }
+
+    public static int[][] permutations(int[] vals) {
+
+        int[][] results = new int[factorial(vals.length)][];
+
+
+
+        return  results;
+    }
+
+
+    public static int[] recursive_permutations(int [] input) {
+
+        if (input.length == 1)
+            return new int[] {input[0]};
+
+        for (int j=0; j<input.length; j++) {
+
+        }
+
+        return null;
+    }
+
 
     public static void splitInTwo(int[] nums, int n, int[] tmpSet1, int[] tmpSet2, int set1Index, int set2Index) {
 

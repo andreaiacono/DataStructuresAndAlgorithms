@@ -1,4 +1,4 @@
-package misc;
+package recursion;
 
 /**
  * Created with IntelliJ IDEA.

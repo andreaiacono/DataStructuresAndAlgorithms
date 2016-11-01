@@ -212,17 +212,26 @@ public class BinaryTree {
         return root;
     }
 
+    public String stringify(BinaryTreeNode node) {
+        String result = "";
+        if (node.getLeft() != null) result += stringify(node.getLeft());
+        if (node.getRight() != null) result += stringify(node.getRight());
+        result = "[" + node.getValue() + (result.length() > 0 ? (result) : "") + "]";
+        return result;
+    }
+
     @Override
     public String toString() {
 
-        int width = (int) Math.pow(2, getHeight());
-
-        StringBuilder builder = new StringBuilder();
-        int maxHeight = getHeight();
-        int level = 0;
-
-        BinaryTreeNode browsingNode = root;
-        while (browsingNode != null) {
+        return stringify(getRoot());
+//        int width = (int) Math.pow(2, getHeight());
+//
+//        StringBuilder builder = new StringBuilder();
+//        int maxHeight = getHeight();
+//        int level = 0;
+//
+//        BinaryTreeNode browsingNode = root;
+//        while (browsingNode != null) {
 
 //
 //            if (key < browsingNode.getKey()) {
@@ -237,12 +246,7 @@ public class BinaryTree {
 //            }
         }
 
-        return null;
-
-    }
-
     public String printTree() {
-
 
         return printTree(root, new StringBuilder());
     }

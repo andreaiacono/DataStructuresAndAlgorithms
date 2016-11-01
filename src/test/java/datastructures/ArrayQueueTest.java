@@ -12,8 +12,8 @@ public class ArrayQueueTest {
 
         ArrayQueue<String> queue = new ArrayQueue<>();
         Assert.assertNull(queue.pop());
-        queue.push("test");
-        Assert.assertEquals("test", queue.pop());
+        queue.push("contains");
+        Assert.assertEquals("contains", queue.pop());
         Assert.assertNull(queue.pop());
 
         queue.push("foo");
@@ -26,9 +26,9 @@ public class ArrayQueueTest {
         queue.push("foo");
         queue.push("bar");
         Assert.assertEquals("foo", queue.pop());
-        queue.push("test");
+        queue.push("contains");
         Assert.assertEquals("bar", queue.pop());
-        Assert.assertEquals("test", queue.pop());
+        Assert.assertEquals("contains", queue.pop());
         Assert.assertNull(queue.pop());
     }
 }

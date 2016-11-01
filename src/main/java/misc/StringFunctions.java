@@ -1,8 +1,13 @@
 package misc;
 
+import com.google.common.base.Strings;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +18,35 @@ import java.util.Map;
 public class StringFunctions {
 
 
+    private static final int MAX = 18; // Max size of Hashmap
+
+    static void printpairs(int arr[], int sum) {
+        // Declares and initializes the whole array as false
+        boolean[] binmap = new boolean[MAX];
+
+        for (int i = 0; i < arr.length; ++i) {
+            int temp = sum - arr[i];
+
+            // checking for condition
+            if (temp >= 0 && binmap[temp]) {
+                System.out.println("Pair with given sum " +
+                        sum + " is (" + arr[i] +
+                        ", " + temp + ")");
+            }
+            binmap[arr[i]] = true;
+        }
+    }
+
+    // Main to test the above function
     public static void main(String[] args) {
+        int A[] = {1, 4, 15, 6, 11, 7};
+        int n = 16;
+        printpairs(A, n);
+    }
+
+    @Test
+    public void test() {
+
 
         System.out.println("anilina: " + isPalindromeWithSpaces("___ani__llin_a"));
 
@@ -21,8 +54,29 @@ public class StringFunctions {
         System.out.println("Reverse: " + Arrays.toString(reverse(val.toCharArray())));
         System.out.println("isAnagram: " + isAnagram2("boston", "tnoobs"));
         System.out.println("isAnagram: " + isAnagram2("boston", "tsoobs"));
+        System.out.println("ToBinary[] = " + toBinary("my phone number: +39 349.564.6599", ""));
 
+//        Arrays.sort();
+//        Collections.sort()
+        assertEquals("ciao andrea ", removeExtraSpaces("  ciao   andrea  "));
     }
+
+
+    public static String removeExtraSpaces(String s) {
+        char previous = s.charAt(0);
+        StringBuilder builder = new StringBuilder(previous);
+
+        for (int j = 0; j < s.length(); j++) {
+            if (s.charAt(j) == ' ' && previous == ' ') {
+                continue;
+            }
+            previous = s.charAt(j);
+            builder.append(previous);
+        }
+
+        return builder.toString();
+    }
+
 
     public static boolean isAnagram2(String val1, String val2) {
 
@@ -108,5 +162,15 @@ public class StringFunctions {
         }
 
         return true;
+    }
+
+    public static String toBinary(String s, String separator) {
+        String result = "";
+        for (int j = 0; j < s.length(); j++) {
+            String bin = Integer.toBinaryString(s.charAt(j));
+            result += Strings.repeat("0", 8 - bin.length()) + bin + separator;
+        }
+
+        return result;
     }
 }
