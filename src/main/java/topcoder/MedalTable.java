@@ -1,4 +1,4 @@
-package misc;
+package topcoder;
 
 import org.junit.Test;
 

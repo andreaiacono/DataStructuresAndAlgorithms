@@ -2,7 +2,6 @@ package recursion;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +17,7 @@ public class SetsTest {
         set0.add(2);
         set0.add(1);
         assertEquals(4, Sets.allSubsets(set0).size());
-
+        System.out.println("Sets=" + Sets.counter);
         Set<Integer> set = new HashSet<>();
         set.add(1);
         set.add(2);
@@ -33,6 +32,7 @@ public class SetsTest {
         set.add(11);
         set.add(12);
         assertEquals(4096, Sets.allSubsets(set).size());
+        System.out.println("Sets=" + Sets.counter);
     }
 
 
@@ -77,30 +77,31 @@ public class SetsTest {
 
     @Test
     public void nChooseK() {
-        Integer[] n = new Integer[]{1, 2, 3, 4, 5};
-        Set<List<Integer>> binomial = Sets.nChooseK(n, 2);
+        Integer[] n = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+        Set<List<Integer>> binomial = Sets.nChoose2(n);
+        assertEquals(153, binomial.size());
         System.out.println(binomial);
-        assertEquals(10, binomial.size());
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{1, 2})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{1, 3})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{1, 4})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{1, 5})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{2, 3})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{2, 4})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{2, 5})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{3, 4})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{3, 5})));
-        assertTrue(binomial.contains(Arrays.asList(new Integer[]{4, 5})));
+//        assertEquals(10, binomial.size());
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{1, 2})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{1, 3})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{1, 4})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{1, 5})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{2, 3})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{2, 4})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{2, 5})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{3, 4})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{3, 5})));
+//        assertTrue(binomial.contains(Arrays.asList(new Integer[]{4, 5})));
 
-        n = new Integer[]{1};
-        binomial = Sets.nChooseK(n, 2);
-        System.out.println(binomial);
-        assertEquals(0, binomial.size());
-
-        n = new Integer[]{1, 2};
-        binomial = Sets.nChooseK(n, 2);
-        System.out.println(binomial);
-        assertEquals(1, binomial.size());
+//        n = new Integer[]{1};
+//        binomial = Sets.nChooseK(n, 2);
+//        System.out.println(binomial);
+//        assertEquals(0, binomial.size());
+//
+//        n = new Integer[]{1, 2};
+//        binomial = Sets.nChooseK(n, 2);
+//        System.out.println(binomial);
+//        assertEquals(1, binomial.size());
     }
 
     @Test

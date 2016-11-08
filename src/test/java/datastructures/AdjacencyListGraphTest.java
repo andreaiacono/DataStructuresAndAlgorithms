@@ -1,6 +1,5 @@
-package java.datastructures;
+package datastructures;
 
-import datastructures.AdjacencyListGraph;
 import datastructures.node.GraphNode;
 import org.junit.Before;
 import org.junit.Test;

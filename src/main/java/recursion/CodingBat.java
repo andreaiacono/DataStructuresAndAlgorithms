@@ -306,6 +306,8 @@ public class CodingBat {
         return fibonacci(n - 2) + fibonacci(n - 1);
     }
 
+
+
     public static int sumDigits(int n) {
         if (n == 0) return 0;
         return n % 10 + sumDigits(n / 10);

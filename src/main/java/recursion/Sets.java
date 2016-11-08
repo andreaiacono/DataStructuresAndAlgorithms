@@ -7,7 +7,7 @@ public class Sets {
 
     static Map<Set<Integer>, Set<Set<Integer>>> cache = new HashMap<>();
 
-    public static Set<Set<Integer>> allSubsets(Set<Integer> set) {
+    public static Set<Set<Integer>> allSubsetsCached(Set<Integer> set) {
 
         if (cache.containsKey(set)) {
             return cache.get(set);
@@ -17,7 +17,7 @@ public class Sets {
         result.add(set);
 
         for (int n: set) {
-            result.addAll(allSubsets(removeElementFromSet(n, set)));
+            result.addAll(allSubsetsCached(removeElementFromSet(n, set)));
         }
 
         cache.put(set, result);
@@ -131,6 +131,23 @@ public class Sets {
     }
 
 
+    public static Set<List<Integer>> nChoose2(Integer[] n) {
+
+        Set<List<Integer>> result = new HashSet<>();
+        for (int j=0; j<n.length; j++) {
+            for (int i=j+1; i<n.length; i++) {
+                if (i!=j) {
+                    List<Integer> list = new LinkedList<>();
+                    list.add(n[j]);
+                    list.add(n[i]);
+                    result.add(list);
+                }
+            }
+        }
+
+        return result;
+    }
+
     static Map<List<Integer>, Set<List<Integer>>> binomialCache = new HashMap<>();
 
     public static Set<List<Integer>> nChooseK(Integer[] n, int k) {
@@ -224,6 +241,33 @@ public class Sets {
         innerParenthesisGenerator(n, opened, closed+1, s + ")");
     }
 
+    public static Set<Set<Integer>> allSubsets(Set<Integer> set) {
+        Set<Set<Integer>> result = allSubsetsInner(set);
+        result.add(new HashSet<>());
+        return result;
+    }
+
+    static int counter = 0;
+    public static Set<Set<Integer>> allSubsetsInner(Set<Integer> set) {
+        counter ++;
+        Set<Set<Integer>> result = new HashSet<>();
+        result.add(set);
+        if (set.size() == 1) {
+            return result;
+        }
+
+        for (int n: set) {
+            result.addAll(allSubsets(removeItem(n, set)));
+        }
+
+        return result;
+    }
+
+    private static Set<Integer> removeItem(Integer n, Set<Integer> set) {
+        Set<Integer> newSet = new HashSet<>(set);
+        newSet.remove(n);
+        return newSet;
+    }
 
     public static int coinChange(int[] values, int sum) {
         System.out.println("call with sum " + sum);

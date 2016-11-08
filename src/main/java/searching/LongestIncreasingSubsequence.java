@@ -8,6 +8,21 @@ import static org.junit.Assert.*;
 
 public class LongestIncreasingSubsequence {
 
+    static int dp(List<Integer> values) {
+        int[] results = new int[values.size()+1];
+        Arrays.fill(results, 1);
+        for (int i=1; i<values.size(); i++) {
+            for (int j=0; j<i; j++) {
+                if (values.get(j) <= values.get(i)) {
+                    if (results[j] +1 > results[i]) {
+                        results[i] = results[j] + 1;
+                    }
+                }
+            }
+        }
+        return Arrays.stream(results).max().getAsInt();
+    }
+
     private static boolean isIncreasing(List<Integer> values) {
         if (values.size() < 2) {
             return true;
@@ -91,17 +106,21 @@ public class LongestIncreasingSubsequence {
         values = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5));
         assertEquals(5, getLongestSubsequence(values));
         assertEquals(5, patienceSort(values, new LinkedList<>()));
+        assertEquals(5, dp(values));
 
         values = new LinkedList<>(Arrays.asList(1, 2, 3, 2, 5));
         assertEquals(4, getLongestSubsequence(values));
         assertEquals(4, patienceSort(values, new LinkedList<>()));
+        assertEquals(4, dp(values));
 
         values = new LinkedList<>(Arrays.asList(5, 1, 3, 7, 4, 6, 5, 4, 8, 9, 6, 5, 3, 2, 1));
         assertEquals(6, getLongestSubsequence(values));
         assertEquals(6, patienceSort(values, new LinkedList<>()));
+        assertEquals(6, dp(values));
 
         values = new LinkedList<>(Arrays.asList(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1));
         assertEquals(1, getLongestSubsequence(values));
         assertEquals(1, patienceSort(values, new LinkedList<>()));
+        assertEquals(1, dp(values));
     }
 }
