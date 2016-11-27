@@ -1,71 +1,68 @@
 package sorting;
 
 
+import org.junit.Test;
+
 import java.util.Arrays;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Quicksort  {
     private int[] numbers;
     private int number;
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
 
         int[] n = new int [] {1,2,10,5,7,6,8};
-        Quicksort qsort = new Quicksort();
-        System.out.println("Before: " + Arrays.toString(n));
-        qsort.sort(n);
-        System.out.println("After : " + Arrays.toString(n));
+        int[] result = new int [] {1,2,5,6,7,8,10};
+        assertFalse(Arrays.equals(result, n));
+        quicksort(n);
+        assertTrue(Arrays.equals(result, n));
     }
 
-    public void sort(int[] values) {
-        // check for empty or null array
-        if (values ==null || values.length==0){
+    public void quicksort(int[] values) {
+        if (values == null || values.length == 0) {
             return;
         }
-        this.numbers = values;
-        number = values.length;
-        quicksort(0, number - 1);
+        quicksort(values, 0, values.length-1);
     }
 
-    private void quicksort(int low, int high) {
-        System.out.println("low=" + low + " high= " + high);
-        int i = low, j = high;
-        // Get the pivot element from the middle of the list
-        int pivot = numbers[low + (high-low)/2];
-
-        // Divide into two lists
-        while (i <= j) {
-            // If the current value from the left list is smaller then the pivot
-            // element then get the next element from the left list
-            while (numbers[i] < pivot) {
-                i++;
-            }
-            // If the current value from the right list is larger then the pivot
-            // element then get the next element from the right list
-            while (numbers[j] > pivot) {
-                j--;
-            }
-
-            // If we have found a values in the left list which is larger then
-            // the pivot element and if we have found a value in the right list
-            // which is smaller then the pivot element then we exchange the
-            // values.
-            // As we are done we can increase i and j
-            if (i <= j) {
-                exchange(i, j);
-                i++;
-                j--;
-            }
+    public void quicksort(int[] values, int low, int hi) {
+        if (hi <= low) {
+            return;
         }
-        // Recursion
-        if (low < j)
-            quicksort(low, j);
-        if (i < high)
-            quicksort(i, high);
+
+        int j = partition(values, low, hi);
+        quicksort(values, low, j-1);
+        quicksort(values, j+1, hi);
     }
 
-    private void exchange(int i, int j) {
-        int temp = numbers[i];
-        numbers[i] = numbers[j];
-        numbers[j] = temp;
+    private int partition(int[] a, int lo, int hi) {
+        int pivot = lo;
+
+        while (lo <= hi) {
+
+            while (lo <= hi && a[lo] <= a[pivot]) {
+                lo++;
+            }
+            while (lo <= hi && a[hi] > a[pivot]) {
+                hi--;
+            }
+            if (lo > hi) {
+                break;
+            }
+            swap(a, lo, hi);
+        }
+
+        swap(a, hi, pivot);
+        return hi;
+    }
+
+    private void swap(int[] a, int x, int y) {
+        int temp = a[x];
+        a[x] = a[y];
+        a[y] = temp;
     }
 }

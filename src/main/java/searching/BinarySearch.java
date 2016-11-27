@@ -17,22 +17,24 @@ public class BinarySearch {
      * @param key
      * @return the searched node or nuill if key not present
      */
-    public static BasicNode getNode(BasicNode[] nodes, int key) {
+    public static BasicNode binarySearch(BasicNode[] nodes, int key) {
 
-        int j;
+        int mid;
         int min = 0;
         int max = nodes.length;
 
         do {
-            j = (min + max) / 2;
+            mid = (min + max) / 2;
 
-            if (nodes[j].getKey() == key) return nodes[j];
+            if (nodes[mid].getKey() == key) {
+                return nodes[mid];
+            }
 
-            if (nodes[j].getKey()>key) {
-                max = j;
+            if (nodes[mid].getKey()>key) {
+                max = mid;
             }
             else  {
-                min = j;
+                min = mid;
             }
         } while (Math.abs(min-max) > 1);
 

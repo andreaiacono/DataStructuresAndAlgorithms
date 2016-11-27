@@ -34,7 +34,7 @@ public class PalindromeNumbers {
 
         return true;
         // or
-        // return new StringBuilder(s).reverse().equals(s);
+        // return new StringBuilder(s).reverse().toString().equals(s);
     }
 
     int[] palindromes(int k) {

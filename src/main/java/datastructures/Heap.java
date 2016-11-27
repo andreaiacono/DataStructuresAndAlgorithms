@@ -13,6 +13,9 @@ public class Heap<E extends Comparable> {
     Object[] data;
     int size = 1;
 
+    public Heap() {
+        data = new Object[128];
+    }
     public Heap(E[] input) {
 
         data = new Object[input.length+1];
@@ -77,4 +80,7 @@ public class Heap<E extends Comparable> {
         return "Heap: " + Arrays.toString(data);
     }
 
+    public E extractMin() {
+        return null;
+    }
 }
