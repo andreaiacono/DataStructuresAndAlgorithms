@@ -22,7 +22,54 @@ public class Sudoku {
                 {0, 0, 0, 0, 8, 0, 0, 7, 9}
         };
         assertTrue(sudokuCheck(s));
+        assertTrue(solveSudoku(s, 0));
     }
+
+    public boolean check(int[][]board, int value, int x, int y){
+        for(int i = 0; i < 9; i++){
+            if(board[i][x] == value){
+                return false;
+            }
+            if(board[y][i] == value){
+                return false;
+            }
+        }
+
+        for(int i = x / 3 * 3; i < (x / 3 + 1) * 3; i++){
+            for(int j = y / 3* 3; j < (y / 3 + 1) * 3; j++){
+                if(x != i && y != j && board[i][j] == value){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean solveSudoku(int[][] board, int position) {
+        boolean result = true;
+        int x = position / 9;
+        int y = position % 9;
+        for(int i = x; i < 9; i++){
+            int start = i == x ? y : 0;
+            for(int j = start; j < 9; j++){
+                if(board[i][j] == 0){
+                    for(int val = 1; val <= 9; val++){
+                        if (check(board, val, i, j)) {
+                            board[i][j] = val;
+                            if (solveSudoku(board, i * 9 + j + 1)) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
+
+
 
     public boolean sudokuCheck(int[][] s) {
         return check(s, 0);

@@ -2,6 +2,7 @@ package recursion;
 
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -42,14 +43,17 @@ public class Permutations {
     /**
      * PERMUTE 2
      */
-    public static void permute2(StringBuilder value, int index, Set<String> values) {
+    public static Set<String> permute2(StringBuilder value, int index) {
+        Set<String> values = new HashSet<>();
         values.add(value.toString());
 
         for (int j = index; j < value.length(); j++) {
             swap(value, index, j);
-            permute2(value, index + 1, values);
+            values.addAll(permute2(value, index + 1));
             swap(value, index, j);
         }
+
+        return values;
     }
 
     private static void swap(StringBuilder s, int index1, int index2) {
@@ -100,8 +104,7 @@ public class Permutations {
         String s = "ABCD";
         Set<String> result = permute1(s);
         System.out.println(result);
-        Set<String> result2 = new TreeSet<>();
-        permute2(new StringBuilder(s), 0, result2);
+        Set<String> result2 = permute2(new StringBuilder(s), 0);
         System.out.println(result2);
 
         Set<String> result3 = new TreeSet<>();

@@ -59,6 +59,8 @@ public class StringFunctions {
 //        Arrays.sort();
 //        Collections.sort()
         assertEquals("ciao andrea ", removeExtraSpaces("  ciao   andrea  "));
+
+        assertEquals("aerdna", recursiveReverse("andrea"));
     }
 
 
@@ -114,6 +116,20 @@ public class StringFunctions {
         }
 
         return true;
+    }
+
+    boolean containsOnlyDigits(String s) {
+        for (int j=0; j<s.length(); j++) {
+            if (s.charAt(j) < '0' || s.charAt(j) > '9') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static String recursiveReverse(String s) {
+        return s.length() == 0 ? "" : recursiveReverse(s.substring(1)) + s.charAt(0);
     }
 
     public static char[] reverse(char[] value) {

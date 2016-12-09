@@ -16,7 +16,7 @@ public class Sets {
         Set<Set<Integer>> result = new HashSet<>();
         result.add(set);
 
-        for (int n: set) {
+        for (int n : set) {
             result.addAll(allSubsetsCached(removeElementFromSet(n, set)));
         }
 
@@ -37,10 +37,10 @@ public class Sets {
             return pairs;
         }
 
-        for (int j=index+1; j<n.length; j++) {
+        for (int j = index + 1; j < n.length; j++) {
             pairs.add(new Pair(n[index], n[j]));
         }
-        pairs.addAll(getPairs(n, index+1));
+        pairs.addAll(getPairs(n, index + 1));
 
         return pairs;
     }
@@ -52,12 +52,12 @@ public class Sets {
             return triples;
         }
 
-        for (int j=index+1; j<n.length; j++) {
-            for (int i=j+1; i<n.length; i++) {
+        for (int j = index + 1; j < n.length; j++) {
+            for (int i = j + 1; i < n.length; i++) {
                 triples.add(new Triple(n[index], n[j], n[i]));
             }
         }
-        triples.addAll(getTriples(n, index+1));
+        triples.addAll(getTriples(n, index + 1));
 
         return triples;
     }
@@ -134,14 +134,12 @@ public class Sets {
     public static Set<List<Integer>> nChoose2(Integer[] n) {
 
         Set<List<Integer>> result = new HashSet<>();
-        for (int j=0; j<n.length; j++) {
-            for (int i=j+1; i<n.length; i++) {
-                if (i!=j) {
-                    List<Integer> list = new LinkedList<>();
-                    list.add(n[j]);
-                    list.add(n[i]);
-                    result.add(list);
-                }
+        for (int j = 0; j < n.length; j++) {
+            for (int i = j + 1; i < n.length; i++) {
+                List<Integer> list = new LinkedList<>();
+                list.add(n[j]);
+                list.add(n[i]);
+                result.add(list);
             }
         }
 
@@ -168,7 +166,7 @@ public class Sets {
             return result;
         }
 
-        for (int j=0; j<n.length; j++) {
+        for (int j = 0; j < n.length; j++) {
             Integer b[] = removeElementAtIndex(n, j);
             result.addAll(nChooseK(b, k));
         }
@@ -184,7 +182,7 @@ public class Sets {
             return true;
         }
 
-        for (int j=0; j<n.length; j++) {
+        for (int j = 0; j < n.length; j++) {
             int b[] = removeElementAtIndex(n, j);
             if (subsetSum(b, sum)) {
                 return true;
@@ -195,9 +193,9 @@ public class Sets {
     }
 
     private static Integer[] removeElementAtIndex(Integer[] n, int index) {
-        Integer b[] = new Integer[n.length-1];
+        Integer b[] = new Integer[n.length - 1];
         int counter = 0;
-        for (int j=0; j<n.length; j++) {
+        for (int j = 0; j < n.length; j++) {
             if (j == index) {
                 continue;
             }
@@ -207,9 +205,9 @@ public class Sets {
     }
 
     private static int[] removeElementAtIndex(int[] n, int index) {
-        int b[] = new int[n.length-1];
+        int b[] = new int[n.length - 1];
         int counter = 0;
-        for (int j=0; j<n.length; j++) {
+        for (int j = 0; j < n.length; j++) {
             if (j == index) {
                 continue;
             }
@@ -232,13 +230,28 @@ public class Sets {
             return;
         }
         if (closed > opened) {
-            if (s.length() == n*2+1) {
+            if (s.length() == n * 2 + 1) {
                 System.out.println(s.substring(0, s.length() - 1));
             }
             return;
         }
-        innerParenthesisGenerator(n, opened+1, closed, s + "(");
-        innerParenthesisGenerator(n, opened, closed+1, s + ")");
+        innerParenthesisGenerator(n, opened + 1, closed, s + "(");
+        innerParenthesisGenerator(n, opened, closed + 1, s + ")");
+    }
+
+    public static Set<Set<Integer>> allSubsets(List<Integer> set) {
+        Set<Set<Integer>> result = new HashSet<>();
+        int n = set.size();
+        for (int i = 0; i < (1 << n); i++) {
+            Set<Integer> subset = new HashSet<>();
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) > 0) {
+                    subset.add(set.get(j));
+                }
+            }
+            result.add(subset);
+        }
+        return result;
     }
 
     public static Set<Set<Integer>> allSubsets(Set<Integer> set) {
@@ -248,15 +261,16 @@ public class Sets {
     }
 
     static int counter = 0;
+
     public static Set<Set<Integer>> allSubsetsInner(Set<Integer> set) {
-        counter ++;
+        counter++;
         Set<Set<Integer>> result = new HashSet<>();
         result.add(set);
         if (set.size() == 1) {
             return result;
         }
 
-        for (int n: set) {
+        for (int n : set) {
             result.addAll(allSubsets(removeItem(n, set)));
         }
 
@@ -279,7 +293,7 @@ public class Sets {
             System.out.println("Looping on " + value);
             if (sum - value >= 0) {
                 results += coinChange(values, sum - value);
-                System.out.println("results is now "+ results);
+                System.out.println("results is now " + results);
             }
         }
 
@@ -290,8 +304,8 @@ public class Sets {
 
     private static String deleteAt(int index, String s) {
         if (index == 0) return s.substring(1);
-        if (index == s.length()-1) return s.substring(0, s.length()-1);
-        return s.substring(0, index) + s.substring(index+1);
+        if (index == s.length() - 1) return s.substring(0, s.length() - 1);
+        return s.substring(0, index) + s.substring(index + 1);
     }
 
     private static String swap(int a, int b, String s) {

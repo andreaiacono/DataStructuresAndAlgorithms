@@ -2,9 +2,6 @@ package misc;
 
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.Assert.assertEquals;
 
 public class CountIslands {
@@ -30,37 +27,17 @@ public class CountIslands {
             {0, -1} // down
     };
 
-    class Position {
-        int x;
-        int y;
-
-        public Position(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public boolean equals(Object o) {
-            if (o == null || !(o instanceof Position)) {
-                return false;
-            }
-
-            Position other = (Position) o;
-            return other.x == x && other.y == y;
-        }
-
-        public int hashCode() {
-            return 17 * x + y;
-        }
-    }
+    final char WATER = '0';
+    final char ISLAND = 'x';
+    final char VISITED_ISLAND = '-';
 
     int countIslands(char[][] map) {
 
-        Set<Position> islands = new HashSet<>();
         int foundIslands = 0;
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
-                if (map[i][j] == 'x' && !islands.contains(new Position(i, j))) {
-                    findIsland(i, j, map, islands);
+                if (map[i][j] == ISLAND) {
+                    findIsland(i, j, map);
                     foundIslands++;
                 }
             }
@@ -69,14 +46,14 @@ public class CountIslands {
         return foundIslands;
     }
 
-    void findIsland(int x, int y, char[][] map, Set<Position> islands) {
-        islands.add(new Position(x, y));
+    void findIsland(int x, int y, char[][] map) {
+        map[x][y] = VISITED_ISLAND;
 
         for (int[] direction : directions) {
             int newX = x + direction[0];
             int newY = y + direction[1];
-            if (isLegal(newX, newY, map) && map[newX][newY] == 'x' && !islands.contains(new Position(newX, newY))) {
-                findIsland(newX, newY, map, islands);
+            if (isLegal(newX, newY, map) && map[newX][newY] == ISLAND) {
+                findIsland(newX, newY, map);
             }
         }
     }

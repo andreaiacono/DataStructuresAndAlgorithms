@@ -23,6 +23,8 @@ public class NumericFunctions {
 
         double d = 125;
         System.out.println("Square root(" + d + ")=" + squareRoot(d, 0.00001));
+
+        System.out.println(numSetBits(1));
     }
 
 
@@ -72,6 +74,16 @@ public class NumericFunctions {
         return max;
     }
 
+    static public int numSetBits(long a) {
+
+        int counter = 0;
+        while (a > 0) {
+            counter += a & 1;
+            a >>= 1;
+        }
+
+        return counter;
+    }
 
 
     public static int numberOf1(int number) {

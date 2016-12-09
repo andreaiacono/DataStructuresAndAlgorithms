@@ -3,8 +3,6 @@ package pramp;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -59,14 +57,14 @@ public class DifferentNumber {
 
 
     Integer differentNumber(int[] arr){
-        Set<Integer> set = new HashSet<>();
-        for (int s : arr){
-            set.add(s);
-        }
-
-        int i=0;
-        while (set.contains(i) && i <= Integer.MAX_VALUE) {++i;}
-        if (i >= 0) { return i; }
+//        Set<Integer> set = new HashSet<>();
+//        for (int s : arr){
+//            set.add(s);
+//        }
+//
+//        int i=0;
+//        while (set.contains(i) && i <= Integer.MAX_VALUE) {++i;}
+//        if (i >= 0) { return i; }
         return null;
     }
 

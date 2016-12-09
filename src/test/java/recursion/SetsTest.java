@@ -2,9 +2,7 @@ package recursion;
 
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -33,6 +31,24 @@ public class SetsTest {
         set.add(12);
         assertEquals(4096, Sets.allSubsets(set).size());
         System.out.println("Sets=" + Sets.counter);
+    }
+
+    @Test
+    public void allSubsetsList() throws Exception {
+        List<Integer> list0 = new ArrayList<>();
+        list0.add(4);
+        list0.add(3);
+        list0.add(2);
+        list0.add(1);
+        Set<Set<Integer>> result = Sets.allSubsets(list0);
+        System.out.println("Result: " + result);
+        assertEquals(16, result.size());
+
+        List<Integer> list = new ArrayList<>();
+        for (int j=1; j<=12; j++) {
+            list.add(j);
+        }
+        assertEquals(4096, Sets.allSubsets(list).size());
     }
 
 
