@@ -1,5 +1,7 @@
 package recursion;
 
+import org.junit.Test;
+
 import java.util.*;
 
 public class Sets {
@@ -145,6 +147,79 @@ public class Sets {
 
         return result;
     }
+
+    @Test
+    public void test() {
+        ArrayList<ArrayList<Integer>> res = combine(3, 3);
+        System.out.println("result=" + res);
+    }
+
+    public ArrayList<ArrayList<Integer>> combine(int n, int k) {
+
+        int[] nums = new int[n];
+        for (int i=1; i<=n; i++) {
+            nums[i-1] = i;
+        }
+
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+
+        if (n < k) {
+            return list;
+        }
+        if (k == 1) {
+            for (int i=0; i<n; i++) {
+                ArrayList<Integer> sub = new ArrayList<>();
+                sub.add(nums[i]);
+                list.add(sub);
+            }
+            return list;
+        }
+
+        list = new ArrayList<>(choose(nums, k));
+        Collections.sort(list, (l1,l2) -> {
+            ArrayList<Integer> shorter = l1.size() < l2.size() ? l1 : l2;
+
+            for (int i=0; i<shorter.size(); i++) {
+                if (l1.get(i) != l2.get(i)) {
+                    return Integer.compare(l1.get(i), l2.get(i));
+                }
+            }
+            return l1.size() < l2.size() ? -1 : 1;
+        });
+        return list;
+    }
+
+    public Set<ArrayList<Integer>> choose(int[] a, int k) {
+        Set<ArrayList<Integer>> result = new HashSet<>();
+        enumerate(a, a.length, k, result);
+        return result;
+    }
+
+    private void enumerate(int[] a, int n, int k, Set<ArrayList<Integer>> result) {
+        if (k == 0) {
+            List<Integer> sub = new ArrayList<>();
+            for (int i = n; i < a.length; i++) {
+                sub.add(a[i]);
+            }
+            Collections.sort(sub);
+            result.add(new ArrayList<>(sub));
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            swap(a, i, n-1);
+            enumerate(a, n-1, k-1, result);
+            swap(a, i, n-1);
+        }
+    }
+
+    public  void swap(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+
 
     static Map<List<Integer>, Set<List<Integer>>> binomialCache = new HashMap<>();
 

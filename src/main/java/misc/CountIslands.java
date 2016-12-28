@@ -2,6 +2,9 @@ package misc;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class CountIslands {
@@ -18,6 +21,10 @@ public class CountIslands {
         };
 
         assertEquals(5, countIslands(map));
+
+
+        ArrayList<String> a = new ArrayList<>(Arrays.asList("OOOXOOO", "OOXXOXO", "OXOOOXO"));
+        assertEquals(3, black(a));
     }
 
     int[][] directions = new int[][]{
@@ -62,4 +69,51 @@ public class CountIslands {
         return x >= 0 && x < map.length && y >= 0 && y< map[0].length;
     }
 
+
+    public int black(ArrayList<String> a) {
+
+        if (a == null) {
+            return -1;
+        }
+
+
+        int counter = 0;
+
+        for (int i=0; i<a.size(); i++) {
+            for (int j=0; j<a.get(0).length(); j++) {
+                if (a.get(i).charAt(j) == 'X') {
+                    markObject(a, i, j);
+                    counter ++;
+                }
+            }
+        }
+
+        return counter;
+    }
+
+    int[][] dirs = new int[][] {
+            {-1,  0}, // left
+            { 1,  0}, // right
+            { 0, -1}, // up
+            { 0,  1}  // down
+    };
+
+    void markObject(ArrayList<String> a, int i, int j) {
+
+        StringBuilder newPos = new StringBuilder(a.get(i));
+        newPos.setCharAt(j, 'M');
+        a.set(i, newPos.toString());
+        System.err.println("A=" + a);
+        for (int[] dir: dirs) {
+            int x = i + dir[0];
+            int y = j + dir[1];
+            if (isLegal(a, x, y) && a.get(x).charAt(y) == 'X') {
+                markObject(a, x, y);
+            }
+        }
+    }
+
+    boolean isLegal(ArrayList<String> a, int x, int y) {
+        return x >= 0 && x < a.size() && y >= 0 && y < a.get(0).length();
+    }
 }

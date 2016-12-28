@@ -65,5 +65,4 @@ public class Kadane {
 
         return Arrays.copyOfRange(a, start, end + 1);
     }
-
 }
