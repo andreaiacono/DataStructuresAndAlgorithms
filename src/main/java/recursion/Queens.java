@@ -70,7 +70,7 @@ public class Queens {
             if (j % SIZE == 0) {
                 sb.append("\n");
             }
-            sb.append(m[j/SIZE][j%SIZE] == QUEEN ? "Q" : m[j/SIZE][j%SIZE] == EMPTY ? "." : "x").append(" ");
+            sb.append(m[j/SIZE][j%SIZE] == QUEEN ? "Q" : m[j/SIZE][j%SIZE] == EMPTY ? "." : "col").append(" ");
         }
 
         return sb.toString();

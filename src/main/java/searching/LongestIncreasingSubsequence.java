@@ -20,6 +20,7 @@ public class LongestIncreasingSubsequence {
                 }
             }
         }
+
         return Arrays.stream(results).max().getAsInt();
     }
 

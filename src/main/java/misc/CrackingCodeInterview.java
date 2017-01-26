@@ -1,7 +1,12 @@
 package misc;
 
+import org.junit.Test;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CrackingCodeInterview {
 
@@ -99,4 +104,59 @@ public class CrackingCodeInterview {
 
         return cache[x][y];
     }
+
+    /**
+     * problem 1.5
+     */
+    boolean isEditDistanceOne(String from, String to) {
+
+        if (Math.abs(from.length() - to.length()) > 1) {
+            return false;
+        }
+
+        // check for replace
+        if (from.length() == to.length()) {
+            boolean isDifferent = false;
+            for (int i=0; i<from.length(); i++) {
+                if (from.charAt(i) != to.charAt(i)) {
+                    if (isDifferent) {
+                        return false;
+                    }
+                    isDifferent = true;
+                }
+            }
+            return true;
+        }
+
+        return from.length() < to.length()
+                ? checkDiffCharacter(from, to) : checkDiffCharacter(to, from);
+    }
+
+    private boolean checkDiffCharacter(String from, String to) {
+        boolean hasBeenInserted = false;
+        for (int fromIndex=0, toIndex=0; fromIndex<from.length(); fromIndex++, toIndex++) {
+            if (from.charAt(fromIndex) != to.charAt(toIndex)) {
+                if (hasBeenInserted) {
+                    return false;
+                }
+                hasBeenInserted = true;
+                toIndex++;
+            }
+        }
+        return true;
+    }
+
+    @Test
+    public void test() {
+        assertTrue(isEditDistanceOne("bake", "bale"));
+        assertTrue(isEditDistanceOne("bar", "bart"));
+        assertTrue(isEditDistanceOne("bar", "sbar"));
+        assertTrue(isEditDistanceOne("bar", "balr"));
+        assertTrue(isEditDistanceOne("sbar", "bar"));
+        assertTrue(isEditDistanceOne("sbar", "sba"));
+        assertTrue(isEditDistanceOne("sbar", "sbr"));
+        assertFalse(isEditDistanceOne("sbar", "psar"));
+        assertFalse(isEditDistanceOne("sbar", "sbit"));
+    }
+
 }

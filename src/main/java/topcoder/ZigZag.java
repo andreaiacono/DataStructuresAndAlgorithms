@@ -3,6 +3,7 @@ package topcoder;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -48,6 +49,6 @@ public class ZigZag {
                 }
             }
         }
-        return Arrays.stream(results).max((r1, r2) -> Integer.compare(r1.length, r2.length)).get().length;
+        return Arrays.stream(results).max(Comparator.comparingInt(r -> r.length)).get().length;
     }
 }

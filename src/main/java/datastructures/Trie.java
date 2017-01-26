@@ -41,6 +41,27 @@ public class Trie {
         return node.isLastLetter();
     }
 
+    public Node findPrefix(String word) {
+        Node result = null;
+        boolean setAsLast = true;
+        Node node = root;
+        for (int j=0; j<word.length(); j++) {
+            if (!node.contains(word.charAt(j))) {
+                return null;
+            }
+            if (setAsLast) {
+                result = node;
+                setAsLast = false;
+            }
+            if (node.children.size() > 1) {
+                setAsLast = true;
+            }
+            node = node.getChild(word.charAt(j));
+        }
+
+        return result;
+    }
+
 
     static class Node {
         char c;

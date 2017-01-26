@@ -2,6 +2,7 @@ package interviewbit;
 
 import org.junit.Test;
 
+import java.math.BigInteger;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -20,6 +21,18 @@ public class DistinctNumsWindows {
 
     }
 
+    public int numTrees(int a) {
+        return binomial(a<<1, a).intValue() / (a+1);
+    }
+
+    static BigInteger binomial(final int N, final int K) {
+        BigInteger ret = BigInteger.ONE;
+        for (int k = 0; k < K; k++) {
+            ret = ret.multiply(BigInteger.valueOf(N-k))
+                     .divide(BigInteger.valueOf(k+1));
+        }
+        return ret;
+    }
 
     public ArrayList<Integer> dNums(ArrayList<Integer> A, int B) {
 
