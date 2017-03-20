@@ -85,11 +85,11 @@ public class GraySequence {
         int level;
         List<Integer> visited;
 
-        Node parent;
+        Node parents;
 
-        public Node(int value, Node parent, int level, List<Integer> visited) {
+        public Node(int value, Node parents, int level, List<Integer> visited) {
             this.value = value;
-            this.parent = parent;
+            this.parents = parents;
             this.level = level;
             this.visited = new ArrayList<>(visited);
             this.visited.add(value);
@@ -135,7 +135,7 @@ public class GraySequence {
         ArrayList<Integer> path = new ArrayList<>();
         while (node != null) {
             path.add(node.value);
-            node = node.parent;
+            node = node.parents;
         }
         return path;
     }

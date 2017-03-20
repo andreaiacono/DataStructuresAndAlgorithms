@@ -26,6 +26,7 @@ public class PalindromicMatrix {
     int countPaths(char[][] mat, int r, int c, String path) {
         path += mat[r][c];
 
+        // goal
         if (r==mat.length-1 && c == mat[0].length-1) {
             return isPalindrome(path) ? 1 : 0;
         }

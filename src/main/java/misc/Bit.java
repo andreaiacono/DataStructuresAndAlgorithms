@@ -19,6 +19,26 @@ public class Bit {
 
         assertTrue(isBinaryPalindrome(9));
         assertFalse(isBinaryPalindrome(10));
+
+        assertEquals(2, bitDiff(1,4));
+        assertEquals(0, bitDiff(3,3));
+        assertEquals(1, bitDiff(5,1));
+        assertEquals(4, bitDiff(8,7));
+    }
+
+
+    public int bitDiff(int n1, int n2) {
+
+        int xor = n1 ^ n2;
+        int counter = 0;
+        while (xor > 0) {
+            if ((xor & 1) == 1) {
+                counter ++;
+            }
+            xor = xor >> 1;
+        }
+
+        return counter;
     }
 
     public int getOnes(int n) {
