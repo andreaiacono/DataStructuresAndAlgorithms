@@ -161,8 +161,8 @@ public class BinaryTree {
         right = findCommonAncestor(root.getRight(), node1, node2);
 
         /**
-         * If Node a and Node b lie in the left, their Lowest Common Ancestor is in the left.
-         * If Node a and Node b lie in the right,their Lowest Common Ancestor is in the right.
+         * If printer.Node a and printer.Node b lie in the left, their Lowest Common Ancestor is in the left.
+         * If printer.Node a and printer.Node b lie in the right,their Lowest Common Ancestor is in the right.
          *
          * Otherwise, root is the Lowest common ancestor.
          */

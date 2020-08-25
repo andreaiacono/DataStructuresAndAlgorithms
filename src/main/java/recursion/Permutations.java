@@ -81,21 +81,20 @@ public class Permutations {
     }
 
     public static String removeCharAt(int index, String value) {
-        return value.substring(0, index) + value.substring(index+1);
+        return value.substring(0, index) + value.substring(index + 1);
     }
 
     /**
      * PERUMTE 4
      */
-    static int counter = 0;
-    private static Set<String> permute4(String s, int index) {
-        Set<String> values = new TreeSet<>();
-        values.add(s);
-        counter ++;
-        for (int j = index; j < s.length(); j++) {
-            values.addAll(permute4(s.charAt(j) + removeCharAt(j, s), index + 1));
+    private static Set<String> permute4(String s, int idx) {
+        if (idx == s.length()) {
+            return Set.of(s);
         }
-
+        Set<String> values = new HashSet<>();
+        for (int i = idx; i < s.length(); i++) {
+            values.addAll(permute4(s.charAt(i) + removeCharAt(i, s), idx + 1));
+        }
         return values;
     }
 
@@ -103,18 +102,16 @@ public class Permutations {
     public void permutations() {
         String s = "ABCD";
         Set<String> result = permute1(s);
-        System.out.println(result);
+        System.out.println("permute1: " + result);
         Set<String> result2 = permute2(new StringBuilder(s), 0);
-        System.out.println(result2);
+        System.out.println("permute2: " + result2);
 
         Set<String> result3 = new TreeSet<>();
         permute3(s, result3);
-        System.out.println(result3);
+        System.out.println("permute3: " + result3);
 
-        System.out.println("coutner=" + counter);
         Set<String> result4 = permute4(s, 0);
-        System.out.println("coutner=" + counter);
-        System.out.println(result4);
+        System.out.println("permute4: " + result4);
 
         assertEquals(24, result.size());
 
@@ -206,7 +203,7 @@ public class Permutations {
         assertTrue(result3.contains("DCAB"));
         assertTrue(result3.contains("DCBA"));
 
-        assertEquals(24, result3.size());
+        assertEquals(24, result4.size());
 
         assertTrue(result4.contains("ABCD"));
         assertTrue(result4.contains("ACBD"));

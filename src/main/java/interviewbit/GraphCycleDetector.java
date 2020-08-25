@@ -55,21 +55,21 @@ public class GraphCycleDetector {
 //        n6.add(n5);
 //        assertTrue(detectCycle(n1));
 //
-//        n1 = new Node(1);
-//        n2 = new Node(2);
-//        n3 = new Node(3);
-//        n4 = new Node(4);
+//        n1 = new printer.Node(1);
+//        n2 = new printer.Node(2);
+//        n3 = new printer.Node(3);
+//        n4 = new printer.Node(4);
 //        n1.add(n2);
 //        n2.add(n3);
 //        n3.add(n4);
 //        n4.add(n1);
 //        assertTrue(detectCycle(n1));
 
-//        n1 = new Node(1);
-//        n2 = new Node(2);
-//        n3 = new Node(3);
-//        n4 = new Node(4);
-//        n5 = new Node(5);
+//        n1 = new printer.Node(1);
+//        n2 = new printer.Node(2);
+//        n3 = new printer.Node(3);
+//        n4 = new printer.Node(4);
+//        n5 = new printer.Node(5);
 //        n1.add(n2).add(n5);
 //        n2.add(n3).add(n5);
 //        n3.add(n4);

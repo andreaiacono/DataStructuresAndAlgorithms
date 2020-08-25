@@ -133,9 +133,9 @@ public class Sets {
     }
 
 
-    public static Set<List<Integer>> nChoose2(Integer[] n) {
+    public static List<List<Integer>> nChoose2(Integer[] n) {
 
-        Set<List<Integer>> result = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>();
         for (int j = 0; j < n.length; j++) {
             for (int i = j + 1; i < n.length; i++) {
                 List<Integer> list = new LinkedList<>();
@@ -221,12 +221,12 @@ public class Sets {
 
 
 
-    static Map<List<Integer>, Set<List<Integer>>> binomialCache = new HashMap<>();
+    static Map<List<Integer>, List<List<Integer>>> binomialCache = new HashMap<>();
 
-    public static Set<List<Integer>> nChooseK(Integer[] n, int k) {
+    public static List<List<Integer>> nChooseK(Integer[] n, int k) {
 
         if (n.length < k) {
-            return new HashSet<>();
+            return new ArrayList<>();
         }
 
         List<Integer> values = Arrays.asList(n);
@@ -235,7 +235,7 @@ public class Sets {
             return binomialCache.get(values);
         }
 
-        Set<List<Integer>> result = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>();
         if (n.length == k) {
             result.add(values);
             return result;

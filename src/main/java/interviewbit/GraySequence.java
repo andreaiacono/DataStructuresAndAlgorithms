@@ -80,14 +80,14 @@ public class GraySequence {
 
     WORKING BUT TOO MEMORY CONSUMING
 
-    class Node {
+    class printer.Node {
         int value;
         int level;
         List<Integer> visited;
 
-        Node parents;
+        printer.Node parents;
 
-        public Node(int value, Node parents, int level, List<Integer> visited) {
+        public printer.Node(int value, printer.Node parents, int level, List<Integer> visited) {
             this.value = value;
             this.parents = parents;
             this.level = level;
@@ -99,18 +99,18 @@ public class GraySequence {
 
 
     ArrayList<Integer> grayCode(int n) {
-        Node start = new Node(0, null, 1, new ArrayList<>());
-        Deque<Node> stack = new ArrayDeque<>();
+        printer.Node start = new printer.Node(0, null, 1, new ArrayList<>());
+        Deque<printer.Node> stack = new ArrayDeque<>();
         stack.push(start);
         int levelSearched = (int) Math.pow(2, n);
 
         while (!stack.isEmpty()) {
-            Node current = stack.pop();
+            printer.Node current = stack.pop();
             if (current.visited.size() == levelSearched) {
                 return getPath(current);
             }
             for (int code : getFollowingNumbers(current.value, n)) {
-                Node child = new Node(code, current, current.level + 1, current.visited);
+                printer.Node child = new printer.Node(code, current, current.level + 1, current.visited);
                 if (!current.visited.contains(code)) {
                     stack.push(child);
                 }
@@ -131,7 +131,7 @@ public class GraySequence {
     }
 
 
-    ArrayList<Integer> getPath(Node node) {
+    ArrayList<Integer> getPath(printer.Node node) {
         ArrayList<Integer> path = new ArrayList<>();
         while (node != null) {
             path.add(node.value);

@@ -40,7 +40,7 @@ public class AdjacencyListGraph extends Graph {
     @Override
     public String toString() {
         StringBuffer result = new StringBuffer("Graph").append("\n");
-        nodes.forEach(n -> result.append("Node [").append(n.getKey()).append("] -> ").append(n.getEdges()).append("\n"));
+        nodes.forEach(n -> result.append("printer.Node [").append(n.getKey()).append("] -> ").append(n.getEdges()).append("\n"));
         return result.toString();
     }
 }

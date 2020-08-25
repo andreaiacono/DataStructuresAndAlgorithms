@@ -2,9 +2,7 @@ package misc;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -27,7 +25,26 @@ public class ArrayPeak {
         a = new int[]{1, 1, 1, 1, 1, 1};
         peaks = new HashSet<>(Arrays.asList(0, 1, 2, 3, 4, 5));
         assertTrue(peaks.contains(getPeak(a)));
+
+        System.out.println(subsK(0, new ArrayList<>(), List.of(1,2,3,4), 2));
     }
+
+    List<List<Integer>> subsK(int idx, List<Integer> partial, List<Integer> nums, int k) {
+
+        if (partial.size() == k) {
+            return List.of(new ArrayList<>(partial));
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = idx; i<nums.size(); i++) {
+            partial.add(nums.get(i));
+            result.addAll(subsK(i+1, partial, nums, k));
+            partial.remove(partial.size()-1);
+        }
+
+        return result;
+    }
+
 
     int getPeak(int[] a) {
 

@@ -92,6 +92,6 @@ public class PrintAllPaths {
         }
 
         @Override
-        public String toString() { return "Node{" + "key=" + key + '}';  }
+        public String toString() { return "printer.Node{" + "key=" + key + '}';  }
     }
 }

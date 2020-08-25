@@ -3,7 +3,6 @@ package datastructures.node;
 import datastructures.Edge;
 import datastructures.NodeStatus;
 
-import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.List;
 

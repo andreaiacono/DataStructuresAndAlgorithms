@@ -34,7 +34,7 @@ public class VisualGraph extends JFrame implements ChangeListener {
 
         setSize(900, 500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+//        UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 
         // control and drawing panels
         drawingPanel = new DrawingPanel();

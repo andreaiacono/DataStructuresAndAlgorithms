@@ -94,7 +94,7 @@ public class SetsTest {
     @Test
     public void nChooseK() {
         Integer[] n = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
-        Set<List<Integer>> binomial = Sets.nChoose2(n);
+        List<List<Integer>> binomial = Sets.nChooseK(n, 2);
         assertEquals(153, binomial.size());
         System.out.println(binomial);
 //        assertEquals(10, binomial.size());
