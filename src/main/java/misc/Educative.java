@@ -1,8 +1,8 @@
 package misc;
 
 import org.junit.Test;
-import printer.BTreePrinter;
-import printer.Node;
+import tree.Node;
+import tree.Printer;
 
 import java.util.*;
 
@@ -119,7 +119,7 @@ public class Educative {
 
     @Test
     public void testMirrorTree() {
-        Node<Integer> root = new Node(1);
+        Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
@@ -127,7 +127,7 @@ public class Educative {
         root.right.right = new Node(7);
         root.right.right.left = new Node(10);
 
-        BTreePrinter printer = new BTreePrinter();
+        Printer printer = new Printer();
         mirrorTree(root);
         printer.printNode(root);
     }
@@ -154,7 +154,7 @@ public class Educative {
 	      2       3
 	     / \     / \
 	    4   5   6   7   */
-        Node<Integer> root = new Node(1);
+        Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
@@ -162,7 +162,7 @@ public class Educative {
         root.right.right = new Node(7);
         root.right.right.left = new Node(10);
 
-        Node<Integer> root2 = new Node(1);
+        Node root2 = new Node(1);
         root2.left = new Node(2);
         root2.right = new Node(3);
         root2.left.left = new Node(4);
@@ -181,13 +181,13 @@ public class Educative {
         assertFalse(checkTrees(root, root2));
     }
 
-    boolean checkTrees(Node<Integer> current1, Node<Integer> current2) {
+    boolean checkTrees(Node current1, Node current2) {
         // base case
         if (current1 == null || current2 == null) {
             return current1 == current2;
         }
 
-        return current1.data.equals(current2.data) &&
+        return current1.data == current2.data &&
                 checkTrees(current1.left, current2.left) &&
                 checkTrees(current1.right, current2.right);
     }
@@ -612,7 +612,7 @@ public class Educative {
 
     @Test
     public void pathToSumTest() {
-        Node<Integer> root = new Node(1);
+        Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
@@ -620,7 +620,7 @@ public class Educative {
         root.right.right = new Node(7);
         root.right.right.left = new Node(10);
 
-        BTreePrinter printer = new BTreePrinter();
+        Printer printer = new Printer();
         printer.printNode(root);
 
         assertTrue(pathToSum(root, 21, 0));
@@ -634,7 +634,7 @@ public class Educative {
     }
 
 
-    boolean pathToSum(Node<Integer> current, int target, int partialSum) {
+    boolean pathToSum(Node current, int target, int partialSum) {
         System.out.println("current: " + (current != null ? current.data : "NULL") + " partial:"  +partialSum);
         partialSum += current.data;
         if (current.left == null && current.right == null) {

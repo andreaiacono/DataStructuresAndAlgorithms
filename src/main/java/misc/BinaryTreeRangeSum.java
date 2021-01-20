@@ -1,7 +1,7 @@
 package misc;
 
 import org.junit.Test;
-import printer.Node;
+import tree.Node;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -26,7 +26,7 @@ public class BinaryTreeRangeSum {
 	               / \
 	              10  8
 	    */
-        Node<Integer> root = new Node(1);
+        Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
@@ -39,7 +39,7 @@ public class BinaryTreeRangeSum {
         assertEquals(13, iterativeBinaryRangeSum(root, 3, 6));
     }
 
-//    int binaryRangeSum(Node<Integer> current, int min, int max) {
+//    int binaryRangeSum(Node current, int min, int max) {
 //
 //        if (current == null) {
 //            return 0;
@@ -50,7 +50,7 @@ public class BinaryTreeRangeSum {
 //            binaryRangeSum(current.right, min, max);
 //    }
 
-    int binaryRangeSum(Node<Integer> current, int min, int max) {
+    int binaryRangeSum(Node current, int min, int max) {
 
         int result = current.data <= max && current.data >= min ? current.data : 0;
         if (current.left != null) {
@@ -62,14 +62,14 @@ public class BinaryTreeRangeSum {
         return result;
     }
 
-    int iterativeBinaryRangeSum(Node<Integer> root, int min, int max) {
+    int iterativeBinaryRangeSum(Node root, int min, int max) {
 
-        Deque<Node<Integer>> stack = new ArrayDeque<>();
+        Deque<Node> stack = new ArrayDeque<>();
         stack.push(root);
         int result = 0;
 
         while (!stack.isEmpty()) {
-            Node<Integer> current = stack.pop();
+            Node current = stack.pop();
             result += current.data <= max && current.data >= min ? current.data : 0;
             if (current.left != null) {
                 stack.push(current.left);

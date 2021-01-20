@@ -1,5 +1,7 @@
 package util;
 
+import com.google.common.base.Objects;
+
 public class Pair<T, S> {
     public T first;
     public S second;
@@ -25,5 +27,10 @@ public class Pair<T, S> {
         int result = first != null ? first.hashCode() : 0;
         result = 31 * result + (second != null ? second.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + first + "," + second + ")";
     }
 }

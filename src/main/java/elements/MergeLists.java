@@ -65,5 +65,9 @@ public class MergeLists {
             this.val = val;
             this.next = next;
         }
+
+        public ListNode(int val) {
+            this.val = val;
+        }
     }
 }

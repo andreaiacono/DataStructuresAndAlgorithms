@@ -5,13 +5,71 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
+
 public class TwoPartitions {
 
     @Test
     public void test() {
-        List<Integer> values = List.of(1, 2, 3, 4, 5, 6, 8, 15, 2, 10, 7);
-        System.out.println(twoPartitions(values));
+        List<Integer> values = List.of(11, 3, 3, 4, 5, 6, 8, 25, 2, 10, 7);
+        List<List<Integer>> result = twoPartitions(values);
+        System.out.println(result);
+        assertEquals(List.of(25, 10, 7), result.get(0));
+        assertEquals(List.of(11, 3, 3, 4, 5, 6, 8, 2), result.get(1));
+
+        List<Pair> all = twoPartitionsAll(values, 0, new Pair(new ArrayList<>(), new ArrayList<>()));
+        System.out.println(all);
+        assertEquals(40, all.size());
     }
+
+
+    List<Pair> twoPartitionsAll(List<Integer> values, int index, Pair tmp) {
+
+        if (tmp.first.size() + tmp.second.size() == values.size()) {
+            if (sum(tmp.first) == sum(tmp.second)) {
+                return List.of(new Pair(new ArrayList<>(tmp.first), new ArrayList<>(tmp.second)));
+            }
+        }
+
+        List<Pair> result = new ArrayList<>();
+        for (int i = index; i < values.size(); i++) {
+            tmp.first.add(values.get(i));
+            List<Pair> subResult = twoPartitionsAll(values, i + 1, tmp);
+            if (subResult != null) {
+                result.addAll(subResult);
+            }
+            tmp.first.remove(tmp.first.size() - 1);
+
+            tmp.second.add(values.get(i));
+            subResult = twoPartitionsAll(values, i + 1, tmp);
+            if (subResult != null) {
+                result.addAll(subResult);
+            }
+
+            tmp.second.remove(tmp.second.size() - 1);
+        }
+        return result;
+    }
+
+    class Pair {
+        List<Integer> first;
+        List<Integer> second;
+
+        public Pair(List<Integer> first, List<Integer> second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public String toString() {
+            return "{" + first + "," + second + "}";
+        }
+    }
+
+    int sum(List<Integer> values) {
+        return values.stream().mapToInt(n -> n).sum();
+    }
+
 
     List<List<Integer>> twoPartitions(List<Integer> values) {
         List<List<Integer>> partial = new ArrayList<>();

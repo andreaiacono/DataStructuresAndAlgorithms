@@ -7,7 +7,7 @@ public class ShortestPath {
 
     // Dijkstra shortest path algorithm
     public List<Node> shortestPath(Graph graph, Node startingNode, Node targetNode) {
-        dijkstra(startingNode, targetNode);
+        dijkstra(graph, startingNode, targetNode);
         Deque<Node> result = new ArrayDeque<>();
         Node current = targetNode;
         while (current != null) {
@@ -18,7 +18,13 @@ public class ShortestPath {
     }
 
     // O(|V^2|)
-    public void dijkstra(Node startingNode, Node targetNode) {
+    public double dijkstra(Graph graph, Node startingNode, Node targetNode) {
+
+        // setup
+        for (Node node: graph.adjList) {
+            node.pathCost = Integer.MAX_VALUE;
+            node.parent = null;
+        }
 
         PriorityQueue<Node> toBeVisited = new PriorityQueue<>(Comparator.comparingDouble(n -> n.pathCost));
         startingNode.pathCost = 0;
@@ -26,7 +32,7 @@ public class ShortestPath {
 
             Node node = toBeVisited.poll();
             if (node.equals(targetNode)) {
-                return;
+                return node.pathCost;
             }
 
             for (Edge edge : node.neighbourEdges) {
@@ -45,6 +51,8 @@ public class ShortestPath {
                 }
             }
         }
+
+        return -1;
     }
 
     class Graph {

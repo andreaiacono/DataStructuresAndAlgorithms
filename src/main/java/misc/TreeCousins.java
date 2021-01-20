@@ -1,7 +1,7 @@
 package misc;
 
 import org.junit.Test;
-import printer.Node;
+import tree.Node;
 
 import java.util.*;
 

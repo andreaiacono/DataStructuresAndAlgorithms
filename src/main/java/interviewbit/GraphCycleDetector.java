@@ -1,12 +1,87 @@
 package interviewbit;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class GraphCycleDetector {
+
+
+
+    @Test
+    public void test() {
+
+        List<Node> nodes = IntStream
+                .range(1, 8)
+                .mapToObj(Node::new)
+                .collect(Collectors.toList());
+
+        Node n1 = nodes.get(0);
+        Node n2 = nodes.get(1);
+        Node n3 = nodes.get(2);
+        Node n4 = nodes.get(3);
+        Node n5 = nodes.get(4);
+        Node n6 = nodes.get(5);
+        Node n7 = nodes.get(6);
+
+        n1.add(n2).add(n3);
+        n2.add(n4);
+        n3.add(n4).add(n6);
+        n4.add(n6).add(n7);
+        n5.add(n1);
+        n6.add(n5);
+        assertTrue(hasCycleDfs(n1, new HashSet<>()));
+
+        cleanNodes(nodes);
+        n1.add(n2);
+        n2.add(n3);
+        n3.add(n4);
+        n4.add(n1);
+        assertTrue(hasCycleDfs(n1, new HashSet<>()));
+
+        cleanNodes(nodes);
+        n1.add(n2).add(n5).add(n3);
+        n2.add(n3).add(n5);
+        n3.add(n4).add(n5);
+        n4.add(n5);
+        assertFalse(hasCycleDfs(n1, new HashSet<>()));
+
+        cleanNodes(nodes);
+        n1.add(n2).add(n3);
+        n2.add(n3);
+        assertFalse(hasCycleDfs(n1, new HashSet<>()));
+    }
+
+    void cleanNodes(List<Node> nodes) {
+        nodes.forEach(Node::clearNeighbours);
+    }
+
+
+    public boolean hasCycleDfs(Node current, Set<Node> visited) {
+
+        if (visited.contains(current)) {
+            return true;
+        }
+
+        visited.add(current);
+
+        for (Node neighbour: current.neighbors) {
+            if (hasCycleDfs(neighbour, visited)) {
+                return true;
+            }
+        }
+
+        visited.remove(current);
+
+        return false;
+    }
 
     class Node {
         int val;
@@ -19,6 +94,10 @@ public class GraphCycleDetector {
         public Node add(Node child) {
             neighbors.add(child);
             return this;
+        }
+
+        public void clearNeighbours() {
+            neighbors.clear();
         }
 
         @Override
@@ -36,83 +115,6 @@ public class GraphCycleDetector {
         public int hashCode() {
             return val * 31;
         }
-    }
-
-    @Test
-    public void test() {
-        Node n1 = new Node(1);
-        Node n2 = new Node(2);
-        Node n3 = new Node(3);
-        Node n4 = new Node(4);
-        Node n5 = new Node(5);
-        Node n6 = new Node(6);
-        Node n7 = new Node(7);
-//        n1.add(n2).add(n3);
-//        n2.add(n4);
-//        n3.add(n4);
-//        n4.add(n2).add(n5).add(n6).add(n7);
-//        n5.add(n4);
-//        n6.add(n5);
-//        assertTrue(detectCycle(n1));
-//
-//        n1 = new printer.Node(1);
-//        n2 = new printer.Node(2);
-//        n3 = new printer.Node(3);
-//        n4 = new printer.Node(4);
-//        n1.add(n2);
-//        n2.add(n3);
-//        n3.add(n4);
-//        n4.add(n1);
-//        assertTrue(detectCycle(n1));
-
-//        n1 = new printer.Node(1);
-//        n2 = new printer.Node(2);
-//        n3 = new printer.Node(3);
-//        n4 = new printer.Node(4);
-//        n5 = new printer.Node(5);
-//        n1.add(n2).add(n5);
-//        n2.add(n3).add(n5);
-//        n3.add(n4);
-//        n4.add(n5);
-//        assertFalse(detectCycle(n1));
-
-        n1 = new Node(1);
-        n2 = new Node(2);
-        n3 = new Node(3);
-        n4 = new Node(4);
-        n1.add(n2).add(n3);
-        n2.add(n3);
-        n3.add(n4);
-        assertFalse(detectCycle(n1, new ArrayDeque<>(Arrays.asList(n1,n2,n3))));
-//        assertFalse(detectCycle(n1));
-    }
-
-    public boolean detectCycle(Node start, Deque<Node> unvisitedNodes) {
-
-        while (!unvisitedNodes.isEmpty()) {
-            Node node = unvisitedNodes.pop();
-            Deque<Node> stack = new ArrayDeque<>();
-            stack.push(node);
-            while (!stack.isEmpty()) {
-                Node top = stack.pop();
-                boolean addedNeighbor = false;
-                for (Node neighbor : top.neighbors) {
-                    if (stack.contains(neighbor)) {
-                        return true;
-                    }
-                    if (unvisitedNodes.contains(neighbor)) {
-                        stack.push(neighbor);
-                        unvisitedNodes.remove(neighbor);
-                        addedNeighbor = true;
-                        break;
-                    }
-                }
-                if (!addedNeighbor) {
-                    stack.pop();
-                }
-            }
-        }
-        return false;
     }
 
     public boolean detectCycle3(Node start) {
@@ -150,11 +152,11 @@ public class GraphCycleDetector {
         return false;
     }
 
-
     public boolean detectCycle2(Node node) {
         Set<Node> visited = new HashSet<>();
         return dfs(node, visited);
     }
+
 
     public boolean dfs(Node node, Set<Node> visited) {
 
